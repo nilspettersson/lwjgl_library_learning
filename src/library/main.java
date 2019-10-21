@@ -159,7 +159,7 @@ public class main {
 			text.bind(0);
 			
 			model2.render();
-			
+			model2.move(0.01f, 0f);
 			
 			win.swapBuffers();
 			
