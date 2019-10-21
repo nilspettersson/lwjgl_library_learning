@@ -89,7 +89,7 @@ void main(){
 	float xdif=x-(l.x);
 	float ydif=y-(l.y);
 	float dis=sqrt((xdif*xdif)+(ydif*ydif));
-	float light=1/(sqrt(dis*100));
+	float light=1/(sqrt(dis*10));
 	
 	
 	
@@ -100,7 +100,7 @@ void main(){
 		gl_FragColor = vec4(1,1,1,0);
 	}
 	else{
-		gl_FragColor = vec4(light,light/4,0.1,light);
+		gl_FragColor = vec4(0.4,0,light/2,light);
 	}
 
 }
