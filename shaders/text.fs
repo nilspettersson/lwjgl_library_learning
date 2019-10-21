@@ -10,10 +10,9 @@ void main(){
 	
 	
 	
-	//vec2 l = gl_FragCoord.xy;
+	//vec2 l = gl_FragCoord.xy/2000;
 	
 	gl_FragColor = texture2D(sampler,tex_coords);
-
 }
 
 
