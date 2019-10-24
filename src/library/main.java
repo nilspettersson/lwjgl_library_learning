@@ -12,6 +12,7 @@ import java.awt.PointerInfo;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
+import java.util.ArrayList;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -86,9 +87,15 @@ public class main {
 		
 		Matrix4f target=new Matrix4f();
 		
+		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
-		Geometry sak=new Rect(1920/2, 1080/2, new Vector4f(1f,1f,1f,1f));
-		sak.init();
+		for(int i=0;i<1000;i++) {
+			rect.add(new Rect(new Vector3f((float)(Math.random()*800),-(float)(Math.random()*800),0),10, 10, new Vector4f(1f,1f,1f,1f)));
+			rect.get(rect.size()-1).init();
+		}
+		
+		
+		
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
 			target=new Matrix4f();
@@ -105,8 +112,10 @@ public class main {
 			
 			Window.drawInit();
 			
-			
-			
+			for(int i=0;i<rect.size();i++) {
+				//rect.get(i).translate(new Vector3f(1920/4, -1080/4, 0));
+				rect.get(i).render(camera);
+			}
 			
 			
 			shader.bind();
@@ -119,38 +128,34 @@ public class main {
 			float xxx=(xx-0)/(1920-0) * (1.777f-(0));
 			float yyy=(yy-0)/(1080-0) * (-1-0)+1;
 			
-			
 			shader.setUniform("x",xxx);
 			shader.setUniform("y",yyy);
 			
-			shader.setUniform("lsx1",0.2f);
-			shader.setUniform("lsy1",0.2f);
-			shader.setUniform("lex1",0.8f);
-			shader.setUniform("ley1",0.8f);
-			
-			
 			model.render();
 			
+			
 			camera.setPosition(new Vector3f(-xx,yy,0));
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			textShader.bind();
 			textShader.setUniform("sampler", 0);
 			textShader.setUniform("projection", camera.getProjection().mul(target));
 			
-			
 			text=new Texture(""+myFps, 100, 100, new Font("", Font.ITALIC, 20));
 			text.bind(0);
-			
-			
-			
 			
 			model2.render();
 			
 			
 			
-			sak.translate(new Vector3f(0, 0, 0), 1);
-			sak.render(camera);
+			
 			
 			
 			

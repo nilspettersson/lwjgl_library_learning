@@ -1,5 +1,6 @@
 package library;
 
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 public class Rect extends Geometry {
@@ -9,11 +10,12 @@ public class Rect extends Geometry {
 	private float height;
 	private float width;
 	
-	public Rect(float width,float height,Vector4f color) {
+	public Rect(Vector3f position,float width,float height,Vector4f color) {
 		super();
 		this.color=color;
 		this.width=width;
 		this.height=height;
+		translate(position);
 	}
 
 	@Override

@@ -22,9 +22,9 @@ public abstract class Geometry {
 	
 	public abstract void setColor(Vector4f color);
 	
-	public void translate(Vector3f vec,int scale) {
+	public void translate(Vector3f vec ) {
 		position=new Matrix4f();
-		position.translate(vec).scale(scale);
+		position.translate(vec);
 	}
 	
 	public void init() {
