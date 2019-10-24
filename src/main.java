@@ -136,7 +136,7 @@ public class main {
 			xx=(xx-0)/(1920-0) * (1.777f-(0));
 			yy=(yy-0)/(1080-0) * (-1-0)+1;
 			
-			System.out.println(xx+"    "+yy);
+		
 			
 			shader.setUniform("x",xx);
 			shader.setUniform("y",yy);
@@ -153,15 +153,8 @@ public class main {
 			textShader.bind();
 			textShader.setUniform("sampler", 0);
 			
-			if(i==10) {
-				text=new Texture(""+total/10, false);
-				i=0;
-				total=0;
-			}
-			else {
-				total+=myFps;
-			}
-			i++;
+			text=new Texture("text!", false);
+			
 			text.bind(0);
 			
 			model2.render();
@@ -182,7 +175,7 @@ public class main {
 	static int myFps=0;
 	public static void update(long f,long l) {
 		
-		int fps=120;
+		int fps=120*12;
 		//setting up the fps cap.
 	double cap = (1.0/fps)*1000;
 	

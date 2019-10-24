@@ -5,6 +5,8 @@ attribute vec2 textures;
 
 varying vec2 tex_coords;
 
+
+
 void main(){
 	
 	tex_coords=textures;

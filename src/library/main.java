@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
 
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWVidMode;
 
@@ -21,32 +23,6 @@ public class main {
 	public static void main(String[] args) {
 		Window win=new Window(1920, 1080);
 		
-		/*if(!glfwInit()) {
-			throw new IllegalStateException("Failed ti initialze GLFW!");
-		}
-		
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		long window=glfwCreateWindow(1980, 1080, "testing", glfwGetPrimaryMonitor(), 0);
-		if(window==0) {
-			throw new IllegalStateException("failed to create window");
-		}
-		
-		//GLFWVidMode videoMode=glfwGetVideoMode(glfwGetPrimaryMonitor());
-		//glfwSetWindowPos(window, (videoMode.width()-1920)/2, (videoMode.height()-1080)/2);
-		
-		
-		
-		
-		glfwShowWindow(window);
-		
-		
-		glfwMakeContextCurrent(window);
-		GL.createCapabilities();
-		
-		
-		glEnable(GL_TEXTURE_2D);
-		
-		*/
 		
 		
 		float[] vertices=new float[] {
@@ -103,8 +79,17 @@ public class main {
 		
 		
 		
+		Camera camera=new Camera(1920, 1080);
+		Matrix4f projection=new Matrix4f().ortho2D(-1920/2, 1920/2, -480/2, 480/2);
+		
+		Matrix4f scale=new Matrix4f().translate(new Vector3f(200,0,0)).scale(256);
+		
+		Matrix4f target=new Matrix4f();
+		
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
+			target=scale;
+			
 			long first = System.nanoTime() /1000000;
 			
 			if(glfwGetKey(win.getWindow(), GLFW_KEY_ESCAPE)==GL_TRUE) {
@@ -117,12 +102,6 @@ public class main {
 			Window.drawInit();
 			
 			
-			//glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
-			
-			
-			/*shader2.bind();
-			model2.render();*/
-			
 			
 			
 			
@@ -133,13 +112,12 @@ public class main {
 			float xx=(float)getMouse().getX();
 			float yy=(float)getMouse().getY();
 			
-			xx=(xx-0)/(1920-0) * (1.777f-(0));
-			yy=(yy-0)/(1080-0) * (-1-0)+1;
+			float xxx=(xx-0)/(1920-0) * (1.777f-(0));
+			float yyy=(yy-0)/(1080-0) * (-1-0)+1;
 			
-			System.out.println(xx+"    "+yy);
 			
-			shader.setUniform("x",xx);
-			shader.setUniform("y",yy);
+			shader.setUniform("x",xxx);
+			shader.setUniform("y",yyy);
 			
 			shader.setUniform("lsx1",0.2f);
 			shader.setUniform("lsy1",0.2f);
@@ -149,17 +127,22 @@ public class main {
 			
 			model.render();
 			
+			camera.setPosition(new Vector3f(-xx,yy,0));
+			
 			
 			textShader.bind();
 			textShader.setUniform("sampler", 0);
-			
+			textShader.setUniform("projection", camera.getProjection().mul(target));
 			
 			
 			text=new Texture(""+myFps, 100, 100, new Font("", Font.ITALIC, 20));
 			text.bind(0);
 			
+			
+			
+			
 			model2.render();
-			model2.move(0.01f, 0f);
+			
 			
 			win.swapBuffers();
 			
@@ -200,10 +183,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
+		System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
+		System.out.println(dif);
 	}
 }
 	
