@@ -87,12 +87,13 @@ public class main {
 		Matrix4f target=new Matrix4f();
 		
 		
-		
-		Geometry sak=new Rect(2, 2, new Vector4f(1,1,1,1));
+		Geometry sak=new Rect(1920/2, 1080/2, new Vector4f(1f,1f,1f,1f));
+		sak.init();
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
 			target=new Matrix4f();
-			target=new Matrix4f().translate(new Vector3f(0,0,0)).scale(256);
+			target=new Matrix4f().translate(new Vector3f(0,0,0)).scale(1);
+			
 			long first = System.nanoTime() /1000000;
 			
 			if(glfwGetKey(win.getWindow(), GLFW_KEY_ESCAPE)==GL_TRUE) {
@@ -148,8 +149,9 @@ public class main {
 			
 			
 			
-			
+			sak.translate(new Vector3f(0, 0, 0), 1);
 			sak.render(camera);
+			
 			
 			
 			win.swapBuffers();
@@ -191,12 +193,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		System.out.println(cap);
+		//System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		System.out.println(dif);
+		//System.out.println(dif);
 	}
 }
 	
