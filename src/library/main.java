@@ -89,10 +89,13 @@ public class main {
 		
 		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
-		for(int i=0;i<1000;i++) {
+		for(int i=0;i<100000;i++) {
 			rect.add(new Rect(new Vector3f((float)(Math.random()*800),-(float)(Math.random()*800),0),10, 10, new Vector4f(1f,1f,1f,1f)));
 			rect.get(rect.size()-1).init();
 		}
+		
+		
+		Shader s=new Shader("shaderSimple");
 		
 		
 		
@@ -111,10 +114,11 @@ public class main {
 			}
 			
 			Window.drawInit();
-			
+			s.bind();
+			s.setUniform("color", new Vector4f(1,1,0,1));
 			for(int i=0;i<rect.size();i++) {
 				//rect.get(i).translate(new Vector3f(1920/4, -1080/4, 0));
-				rect.get(i).render(camera);
+				rect.get(i).render(camera,s);
 			}
 			
 			
