@@ -45,38 +45,6 @@ public class Model {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	
-	public void move(float x,float y) {
-		
-		for(int i=0;i<vertices.length;i+=3) {
-			vertices[i]+=x;
-			vertices[i+1]+=y;
-		}
-		
-		
-		v_id=glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, v_id);
-		glBufferData(GL_ARRAY_BUFFER, createBuffer(vertices), GL_STATIC_DRAW);
-		
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-	public void moveTo(float x,float y) {
-		/*vertices[0]+=x;
-		vertices[1]+=y;
-		for(int i=0;i<vertices.length;i+=3) {
-			vertices[i]+=x;
-			vertices[i+1]+=y;
-		}
-		*/
-		
-		v_id=glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, v_id);
-		glBufferData(GL_ARRAY_BUFFER, createBuffer(vertices), GL_STATIC_DRAW);
-		
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-	
 	
 	public void render() {
 		glEnableVertexAttribArray(0);

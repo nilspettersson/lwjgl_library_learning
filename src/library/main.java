@@ -15,6 +15,7 @@ import java.nio.DoubleBuffer;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWVidMode;
 
@@ -80,16 +81,18 @@ public class main {
 		
 		
 		Camera camera=new Camera(1920, 1080);
-		Matrix4f projection=new Matrix4f().ortho2D(-1920/2, 1920/2, -480/2, 480/2);
+		Matrix4f projection=new Matrix4f();
 		
-		Matrix4f scale=new Matrix4f().translate(new Vector3f(200,0,0)).scale(256);
 		
 		Matrix4f target=new Matrix4f();
 		
 		
+		
+		Geometry sak=new Rect(2, 2, new Vector4f(1,1,1,1));
+		
 		while(!glfwWindowShouldClose(win.getWindow())) {
-			target=scale;
-			
+			target=new Matrix4f();
+			target=new Matrix4f().translate(new Vector3f(0,0,0)).scale(256);
 			long first = System.nanoTime() /1000000;
 			
 			if(glfwGetKey(win.getWindow(), GLFW_KEY_ESCAPE)==GL_TRUE) {
@@ -142,6 +145,11 @@ public class main {
 			
 			
 			model2.render();
+			
+			
+			
+			
+			sak.render(camera);
 			
 			
 			win.swapBuffers();
