@@ -83,17 +83,17 @@ void main(){
 		float xdif=location[i].x-l.x;
 		float ydif=location[i].y-l.y;
 		float dis=((xdif*xdif)+(ydif*ydif));
-		//if(lineIntersection(1, -0.7, 1.3, -0.5, l.x, l.y, location[i].x, location[i].y) || lineIntersection(1.2, 0.5, 3, 0.8, l.x, l.y, location[i].x, location[i].y)){
+		if(lineIntersection(1, -0.7, 1.3, -0.5, l.x, l.y, location[i].x, location[i].y) || lineIntersection(1.2, 0.5, 2, 0, l.x, l.y, location[i].x, location[i].y)){
 			
-		//}
-		//else{
-			light+=1/(sqrt(dis)*100);
-		//}
+		}
+		else{
+			light+=1/(sqrt(dis)*400);
+		}
 		
 	}
 	
 	
-	gl_FragColor = vec4(light/1.8,light/3,light,light);
+	gl_FragColor = vec4(light,light/3,0.4,light);
 	
 	
 	/*if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){

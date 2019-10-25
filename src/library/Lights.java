@@ -35,11 +35,11 @@ public class Lights {
 	//private Matrix4f position=new Matrix4f(); 
 	
 	
-	private ArrayList<Matrix4f> lights;
+	private ArrayList<Particle> lights;
 	private Shader shader;
 	
 	public Lights() {
-		lights=new ArrayList<Matrix4f>();
+		lights=new ArrayList<Particle>();
 		shader=new Shader("shaderLights");
 		model=new Model(vertices, texture,indices);
 	
@@ -47,27 +47,86 @@ public class Lights {
 	}
 	
 	public void addLight(float x,float y) {
-		lights.add(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0)));
+		lights.add(new Particle(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0))));
 	}
 	
 	
 	private int particleMax=1;
 	private int particlesPerFrame=1;
-	private int particleX=0;
-	private int particleY=0;
-	private int particleRandomX=0;
-	private int particleRandomY=0;
-	public void particleSystemInit(float x,float y, float randomX,float randomY,int amount) {
-		for(int i=0;i<amount;i++) {
-			addLight((float)(Math.random()*randomX)-randomX/2, (float)(Math.random()*randomY)-randomY/2);
-		}
+	private float particleX=0;
+	private float particleY=0;
+	private float particleRandomX=0;
+	private float particleRandomY=0;
+	private float lifeTime=0;
+	
+	private float particleXVel=0;
+	private float particleYVel=0;
+	private float particleRandomXVel=0;
+	private float particleRandomYVel=0;
+	public void particleSystemInit(int particleMax,int particlesPerFrame, float particleX,float particleY,float particleRandomX,float particleRandomY,float lifeTime) {
+		this.particleMax=particleMax;
+		this.particlesPerFrame=particlesPerFrame;
+		this.particleX=particleX;
+		this.particleY=particleY;
+		this.particleRandomX=particleRandomX;
+		this.particleRandomY=particleRandomY;
+		this.lifeTime=lifeTime;
+		
+		
+		
 	}
+	public void setStartVel(float particleXVel,float particleYVel,float particleRandomXVel,float particleRandomYVel) {
+		this.particleXVel=particleXVel;
+		this.particleYVel=particleYVel;
+		this.particleRandomXVel=particleRandomXVel;
+		this.particleRandomYVel=particleRandomYVel;
+	}
+	public float getParticleX() {
+		return particleX;
+	}
+
+	public void setParticleX(float particleX) {
+		this.particleX = particleX;
+	}
+
+	public float getParticleY() {
+		return particleY;
+	}
+
+	public void setParticleY(float particleY) {
+		this.particleY = particleY;
+	}
+
+	
+	
 	public void particleUpdate() {
-		if(lights.size()<particleMax-particlesPerFrame)
-		for(int i=0;i<particlesPerFrame;i++) {
-			addLight((float)(Math.random()*particleRandomX)-particleRandomX/2, (float)(Math.random()*particleRandomY)-particleRandomY/2);
+		if(lights.size()<particleMax-particlesPerFrame) {
+			for(int i=0;i<particlesPerFrame;i++) {
+				addLight(particleX+(float)(Math.random()*particleRandomX)-particleRandomX/2, particleY+(float)(Math.random()*particleRandomY)-particleRandomY/2);
+				lights.get(lights.size()-1).setLifeTime(lifeTime);
+				lights.get(lights.size()-1).setxVel(particleXVel+(float)(Math.random()*particleRandomXVel)-particleRandomXVel/2);
+				lights.get(lights.size()-1).setyVel(particleYVel+(float)(Math.random()*particleRandomYVel)-particleRandomYVel/2);
+			}
+		}
+		
+		for(int i=0;i<lights.size();i++) {
+			translate(i, lights.get(i).position.m30+lights.get(i).getxVel(), lights.get(i).position.m31+lights.get(i).getyVel());
+			lights.get(i).setLifeTime(lights.get(i).getLifeTime()-1);
+		}
+		for(int i=0;i<lights.size();i++) {
+			if(lights.get(i).getLifeTime()<=0) {
+				lights.remove(i);
+			}
+		}
+		
+	}
+	
+	public void addForce(float x,float y) {
+		for(int i=0;i<lights.size();i++) {
+			lights.get(i).addForce(x, y);
 		}
 	}
+
 	
 	
 	
@@ -80,7 +139,7 @@ public class Lights {
 	private Vector4f[] getVecFromMatrix(Camera camera) {
 		Vector4f[]vecArray=new Vector4f[lights.size()];
 		for(int i=0;i<lights.size();i++) {
-			Matrix4f send=camera.getProjection().mul(lights.get(i));
+			Matrix4f send=camera.getProjection().mul(lights.get(i).position);
 			Vector4f vector=new Vector4f(send.m30*1.77777777f,send.m31,send.m32,send.m33);
 			vecArray[i]=vector;
 		}
@@ -88,8 +147,8 @@ public class Lights {
 	}
 	
 	public void translate(int index,float x,float y) {
-		lights.set(index, new Matrix4f());
-		lights.get(index).translate(new Vector3f(x,y,0));
+		lights.get(index).position=new Matrix4f();
+		lights.get(index).position.translate(new Vector3f(x,y,0));
 	}
 	
 	

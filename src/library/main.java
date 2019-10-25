@@ -95,9 +95,13 @@ public class main {
 		Shader s=new Shader("shaderSimple");
 		
 		Lights lights=new Lights();
-		for(int i=0;i<1;i++) {
+		/*for(int i=0;i<1;i++) {
 			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250);
-		}
+		}*/
+		
+		lights.particleSystemInit(101, 1, 0, 0, 50, 50, 100);
+		lights.setStartVel(0, 0, 0.0f, 0.0f);
+		
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
@@ -142,7 +146,11 @@ public class main {
 			
 			
 			
+			lights.setParticleX(getMouse().x-1920/2);
+			lights.setParticleY(-getMouse().y+1080/2);
 			
+			//lights.addForce(0f, 0.01f);
+			lights.particleUpdate();
 			lights.render(camera);
 			
 			
@@ -176,7 +184,7 @@ public class main {
 	static int myFps=0;
 	public static void update(long f,long l) {
 		
-		int fps=120*2;
+		int fps=120*10;
 		//setting up the fps cap.
 	double cap = (1.0/fps)*1000;
 	
@@ -202,12 +210,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		//System.out.println(cap);
+		System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		//System.out.println(dif);
+		System.out.println(dif);
 	}
 }
 	
