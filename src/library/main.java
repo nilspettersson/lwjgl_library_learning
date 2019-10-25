@@ -82,16 +82,11 @@ public class main {
 		
 		
 		Camera camera=new Camera(1920, 1080);
-		Matrix4f projection=new Matrix4f();
-		
-		
-		Matrix4f target=new Matrix4f();
 		
 		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
-		for(int i=0;i<100000;i++) {
+		for(int i=0;i<1;i++) {
 			rect.add(new Rect(new Vector3f((float)(Math.random()*800),-(float)(Math.random()*800),0),10, 10, new Vector4f(1f,1f,1f,1f)));
-			rect.get(rect.size()-1).init();
 		}
 		
 		
@@ -101,8 +96,7 @@ public class main {
 		
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
-			target=new Matrix4f();
-			target=new Matrix4f().translate(new Vector3f(0,0,0)).scale(1);
+			Window.drawInit();
 			
 			long first = System.nanoTime() /1000000;
 			
@@ -113,7 +107,8 @@ public class main {
 				System.out.println("click");
 			}
 			
-			Window.drawInit();
+			
+			
 			s.bind();
 			s.setUniform("color", new Vector4f(1,1,0,1));
 			for(int i=0;i<rect.size();i++) {
@@ -150,7 +145,7 @@ public class main {
 			
 			textShader.bind();
 			textShader.setUniform("sampler", 0);
-			textShader.setUniform("projection", camera.getProjection().mul(target));
+			textShader.setUniform("projection", camera.getProjection());
 			
 			text=new Texture(""+myFps, 100, 100, new Font("", Font.ITALIC, 20));
 			text.bind(0);

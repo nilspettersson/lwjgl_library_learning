@@ -24,10 +24,6 @@ public abstract class Geometry {
 		position.translate(vec).scale(width, height, 0);
 	}
 	
-	public void init() {
-		model=createModel();
-		texture=createTexture();
-	}
 	
 	public void render(Camera camera, Shader shader) {
 		shader.bind();

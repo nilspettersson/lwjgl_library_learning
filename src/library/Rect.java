@@ -35,6 +35,9 @@ public class Rect extends Geometry {
 		this.width=width;
 		this.height=height;
 		translate(position,width,height);
+		
+		setModel(createModel());
+		setTexture(createTexture());
 	}
 
 	@Override
