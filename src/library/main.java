@@ -27,7 +27,7 @@ public class main {
 		
 		
 		
-		float[] vertices=new float[] {
+		/*float[] vertices=new float[] {
 				-1f,1f,0,
 				1f,1f,0,
 				1f,-1f,0,
@@ -49,7 +49,7 @@ public class main {
 		
 		Model model=new Model(vertices, texture,indices);
 		Shader shader=new Shader("shader");
-		
+		*/
 		
 		
 		Texture text=new Texture(""+0, 200, 200, new Font("", Font.ITALIC, 20));
@@ -86,13 +86,13 @@ public class main {
 		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
 		for(int i=0;i<1;i++) {
-			rect.add(new Rect(new Vector3f((float)(Math.random()*800),-(float)(Math.random()*800),0),10, 10, new Vector4f(1f,1f,1f,1f)));
+			rect.add(new Rect(new Vector3f((float)(Math.random()*0),-(float)(Math.random()*0),0),10, 10, new Vector4f(1f,1f,1f,1f)));
 		}
 		
 		
 		Shader s=new Shader("shaderSimple");
 		
-		
+		Lights lights=new Lights();
 		
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
@@ -117,7 +117,7 @@ public class main {
 			}
 			
 			
-			shader.bind();
+			//shader.bind();
 			
 			
 			//Y = (X-A)/(B-A) * (D-C) + C
@@ -127,10 +127,10 @@ public class main {
 			float xxx=(xx-0)/(1920-0) * (1.777f-(0));
 			float yyy=(yy-0)/(1080-0) * (-1-0)+1;
 			
-			shader.setUniform("x",xxx);
-			shader.setUniform("y",yyy);
+			//shader.setUniform("x",xxx);
+			//shader.setUniform("y",yyy);
 			
-			model.render();
+			//model.render();
 			
 			
 			camera.setPosition(new Vector3f(-xx,yy,0));
@@ -138,7 +138,7 @@ public class main {
 			
 			
 			
-			
+			lights.render(camera);
 			
 			
 			
