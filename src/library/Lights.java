@@ -51,6 +51,28 @@ public class Lights {
 	}
 	
 	
+	private int particleMax=1;
+	private int particlesPerFrame=1;
+	private int particleX=0;
+	private int particleY=0;
+	private int particleRandomX=0;
+	private int particleRandomY=0;
+	public void particleSystemInit(float x,float y, float randomX,float randomY,int amount) {
+		for(int i=0;i<amount;i++) {
+			addLight((float)(Math.random()*randomX)-randomX/2, (float)(Math.random()*randomY)-randomY/2);
+		}
+	}
+	public void particleUpdate() {
+		if(lights.size()<particleMax-particlesPerFrame)
+		for(int i=0;i<particlesPerFrame;i++) {
+			addLight((float)(Math.random()*particleRandomX)-particleRandomX/2, (float)(Math.random()*particleRandomY)-particleRandomY/2);
+		}
+	}
+	
+	
+	
+	
+	
 	
 	private Matrix4f position=new Matrix4f(); 
 	

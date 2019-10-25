@@ -35,7 +35,7 @@ float det(float a,float b,float c,float d){
 	return a*d-b*c;
 }
 
-/*bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, float x4,float y4){
+bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, float x4,float y4){
 	
 	
 	float det1And2=det(x1,y1,x2,y2);
@@ -61,7 +61,7 @@ float det(float a,float b,float c,float d){
 	
 	
 	
-}*/
+}
 
 
 
@@ -87,7 +87,7 @@ void main(){
 			
 		//}
 		//else{
-			light+=1/((dis)*1000);
+			light+=1/(sqrt(dis)*100);
 		//}
 		
 	}

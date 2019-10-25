@@ -1,6 +1,8 @@
 package library;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.WGL;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.Color;
@@ -52,7 +54,7 @@ public class main {
 		*/
 		
 		
-		Texture text=new Texture(""+0, 200, 200, new Font("", Font.ITALIC, 20));
+		//Texture text=new Texture(""+0, 200, 200, new Font("", Font.ITALIC, 20));
 		
 		
 		
@@ -93,11 +95,11 @@ public class main {
 		Shader s=new Shader("shaderSimple");
 		
 		Lights lights=new Lights();
-		for(int i=0;i<100;i++) {
-			lights.addLight((float)(Math.random()*600), (float)(Math.random()*600));
+		for(int i=0;i<1;i++) {
+			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250);
 		}
 		
-		
+		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
 			Window.drawInit();
 			
@@ -146,14 +148,14 @@ public class main {
 			
 			
 			
-			textShader.bind();
+			/*textShader.bind();
 			textShader.setUniform("sampler", 0);
 			textShader.setUniform("projection", camera.getProjection());
 			
 			text=new Texture(""+myFps, 100, 100, new Font("", Font.ITALIC, 20));
 			text.bind(0);
 			
-			model2.render();
+			model2.render();*/
 			
 			
 			
@@ -200,12 +202,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		System.out.println(cap);
+		//System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		System.out.println(dif);
+		//System.out.println(dif);
 	}
 }
 	
