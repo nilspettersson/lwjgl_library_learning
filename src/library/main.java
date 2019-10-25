@@ -93,6 +93,9 @@ public class main {
 		Shader s=new Shader("shaderSimple");
 		
 		Lights lights=new Lights();
+		for(int i=0;i<100;i++) {
+			lights.addLight((float)(Math.random()*600), (float)(Math.random()*600));
+		}
 		
 		
 		while(!glfwWindowShouldClose(win.getWindow())) {
@@ -133,7 +136,7 @@ public class main {
 			//model.render();
 			
 			
-			camera.setPosition(new Vector3f(-xx,yy,0));
+			//camera.setPosition(new Vector3f(-xx,yy,0));
 			
 			
 			
@@ -197,12 +200,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		//System.out.println(cap);
+		System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		//System.out.println(dif);
+		System.out.println(dif);
 	}
 }
 	

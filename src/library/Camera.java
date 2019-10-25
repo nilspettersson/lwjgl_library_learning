@@ -7,7 +7,12 @@ public class Camera {
 	private Vector3f position;
 	private Matrix4f projection;
 	
-	public Camera(int width,int height) {
+	private float width;
+	private float height;
+	
+	public Camera(float width,float height) {
+		this.width=width;
+		this.height=height;
 		position=new Vector3f(0,0,0);
 		projection=new Matrix4f().setOrtho2D(-width/2, width/2, -height/2, height/2);
 	}
@@ -27,5 +32,24 @@ public class Camera {
 		target=projection.mul(pos,target);
 		return target;
 	}
+	
+
+	public float getWidth() {
+		return width;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+	
+	
 
 }

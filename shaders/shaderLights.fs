@@ -6,13 +6,11 @@ varying vec2 tex_coords;
 uniform float x;
 uniform float y;
 
-uniform vec4 location;
+
+uniform int size;
+uniform vec4[1000] location;
 
 
-uniform float lsx1;
-uniform float lsy1;
-uniform float lex1;
-uniform float ley1;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -37,7 +35,7 @@ float det(float a,float b,float c,float d){
 	return a*d-b*c;
 }
 
-bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, float x4,float y4){
+/*bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, float x4,float y4){
 	
 	
 	float det1And2=det(x1,y1,x2,y2);
@@ -63,7 +61,7 @@ bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, fl
 	
 	
 	
-}
+}*/
 
 
 
@@ -74,36 +72,36 @@ bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, fl
 void main(){
 	
 	
-	vec2 l = gl_FragCoord.xy/(1);
-	
-	
-	/*float newX=map(x,0,1919,0,1);
-	float newY=map(y,0,1079,0,1);
-	gl_FragColor = vec4(newX,newY,(newX+newY)/2,1);*/
-	
-	
-	
-	/*float xx=map(x,0,1920,-1,1)+0.8;
-	float yy=map(y,0,1080,1,-1)+0.5;*/
-	
+	vec2 l = gl_FragCoord.xy;
 	
 	l.x=(l.x)/(1080/2);
 	l.y=(l.y-1080/2)/(1080/2);
-	float xdif=location.x-l.x;
-	float ydif=location.y-l.y;
-	float dis=sqrt((xdif*xdif)+(ydif*ydif));
-	float light=1/(dis*10);
 	
 	
+	float light=0;
+	for(int i=0;i<size;i++){
+		float xdif=location[i].x-l.x;
+		float ydif=location[i].y-l.y;
+		float dis=((xdif*xdif)+(ydif*ydif));
+		//if(lineIntersection(1, -0.7, 1.3, -0.5, l.x, l.y, location[i].x, location[i].y) || lineIntersection(1.2, 0.5, 3, 0.8, l.x, l.y, location[i].x, location[i].y)){
+			
+		//}
+		//else{
+			light+=1/((dis)*1000);
+		//}
+		
+	}
 	
 	
+	gl_FragColor = vec4(light/1.8,light/3,light,light);
 	
-	if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){
+	
+	/*if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){
 		gl_FragColor = vec4(0,0,0,0);
 	}
 	else{
 		gl_FragColor = vec4(light,light/2,0.2,light);
-	}
+	}*/
 
 }
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
@@ -87,6 +88,25 @@ public class Shader {
 			glUniformMatrix4fv(location, false, buffer);
 		}
 	}
+	
+	public void setUniform(String name,Vector4f[] vec) {
+		int location=glGetUniformLocation(program, name);
+		FloatBuffer buffer=BufferUtils.createFloatBuffer(vec.length*4);
+		for(int i=0;i<vec.length;i++) {
+			buffer.put(vec[i].x);
+			buffer.put(vec[i].y);
+			buffer.put(vec[i].z);
+			buffer.put(vec[i].w);
+		}
+		buffer.flip();
+		if(location!=-1) {
+			glUniform4fv(location, buffer);
+		}
+	}
+	
+	
+	
+	
 	
 	
 	public void bind() {

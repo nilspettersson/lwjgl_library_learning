@@ -44,11 +44,10 @@ public class Lights {
 		model=new Model(vertices, texture,indices);
 	
 		
-		addLight(0, 0);
 	}
 	
 	public void addLight(float x,float y) {
-		lights.add(new Matrix4f().translate(new Vector3f(1920/2,0,0)));
+		lights.add(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0)));
 	}
 	
 	
@@ -56,6 +55,20 @@ public class Lights {
 	private Matrix4f position=new Matrix4f(); 
 	
 	
+	private Vector4f[] getVecFromMatrix(Camera camera) {
+		Vector4f[]vecArray=new Vector4f[lights.size()];
+		for(int i=0;i<lights.size();i++) {
+			Matrix4f send=camera.getProjection().mul(lights.get(i));
+			Vector4f vector=new Vector4f(send.m30*1.77777777f,send.m31,send.m32,send.m33);
+			vecArray[i]=vector;
+		}
+		return vecArray;
+	}
+	
+	public void translate(int index,float x,float y) {
+		lights.set(index, new Matrix4f());
+		lights.get(index).translate(new Vector3f(x,y,0));
+	}
 	
 	
 	//m30=x.
@@ -65,21 +78,21 @@ public class Lights {
 		Camera tempCamera=new Camera(1920, 1080);
 		tempCamera.setPosition(new Vector3f(-1920/2,1080/2,0));
 		
+		
 		shader.bind();
+		
+		
 		position=new Matrix4f();
-		position.translate(new Vector3f(0,0,0)).scale(1920, 1080, 0);
+		position.translate(new Vector3f(0,0,0)).scale(camera.getWidth(), camera.getHeight(), 0);
 		shader.setUniform("projection", tempCamera.getProjection().mul(position));
 		
-		//for(int i=0;i<lights.size();i++) {
-			Matrix4f send=camera.getProjection().mul(lights.get(0));
-			System.out.println("x="+send.m30+"  +y="+send.m31);
-			shader.setUniform("location",new Vector4f(send.m30*1.77777777f,send.m31,send.m32,send.m33));
-			
-		//}
+		shader.setUniform("size", lights.size());
+		
+		translate(0,getMouse().x,-getMouse().y+1080/2);
+		
+		shader.setUniform("location",getVecFromMatrix(camera));//the location of the lights for the shader.
 		
 		
-		//shader.setUniform("x",0);
-		//shader.setUniform("y",0);
 		
 		
 		model.render();
