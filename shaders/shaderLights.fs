@@ -87,9 +87,10 @@ void main(){
 	float yy=map(y,0,1080,1,-1)+0.5;*/
 	
 	
-	
-	float xdif=location.x-((l.x)/(1920/2));
-	float ydif=location.y-((l.y-1080/2)/(1080/2));
+	l.x=(l.x)/(1080/2);
+	l.y=(l.y-1080/2)/(1080/2);
+	float xdif=location.x-l.x;
+	float ydif=location.y-l.y;
 	float dis=sqrt((xdif*xdif)+(ydif*ydif));
 	float light=1/(dis*10);
 	
@@ -97,12 +98,12 @@ void main(){
 	
 	
 	
-	//if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, x, y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, x, y)){
-		//gl_FragColor = vec4(0,0,0,0);
-	//}
-	//else{
+	if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){
+		gl_FragColor = vec4(0,0,0,0);
+	}
+	else{
 		gl_FragColor = vec4(light,light/2,0.2,light);
-	//}
+	}
 
 }
 

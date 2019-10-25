@@ -61,6 +61,7 @@ public class Lights {
 	//m30=x.
 	//m31=y.
 	public void render(Camera camera) {
+		//creates a camera that is has a position in the middle of the screen
 		Camera tempCamera=new Camera(1920, 1080);
 		tempCamera.setPosition(new Vector3f(-1920/2,1080/2,0));
 		
@@ -72,7 +73,7 @@ public class Lights {
 		//for(int i=0;i<lights.size();i++) {
 			Matrix4f send=camera.getProjection().mul(lights.get(0));
 			System.out.println("x="+send.m30+"  +y="+send.m31);
-			shader.setUniform("location",new Vector4f(send.m30,send.m31,send.m32,send.m33));
+			shader.setUniform("location",new Vector4f(send.m30*1.77777777f,send.m31,send.m32,send.m33));
 			
 		//}
 		
