@@ -19,6 +19,29 @@ public class Shadows {
 		shadowPoints.add(new Matrix4f().translate(new Vector3f((1920/2)+x,y,0)));
 	}
 	
+	public void shadowFromGeometry(Geometry geometry, Camera camera) {
+		Matrix4f temp=geometry.getPosition();
+		
+		float[] vertices=geometry.getModel().getVertices();
+		
+		
+		//m00 width m11=height
+		for(int i=0;i<vertices.length;i+=3) {
+			float x=temp.m30+vertices[i]*temp.m00;
+			float y=temp.m31+vertices[i+1]*temp.m11;
+			shadowPoints.add(new Matrix4f().translate(new Vector3f((1920/2)+x,y,0)));
+			
+			if(i!=0 && i!=vertices.length-1) {
+				shadowPoints.add(new Matrix4f().translate(new Vector3f((1920/2)+x,y,0)));
+			}
+			if(i==vertices.length-3) {
+				x=temp.m30+vertices[0]*temp.m00;
+				y=temp.m31+vertices[0+1]*temp.m11;
+				shadowPoints.add(new Matrix4f().translate(new Vector3f((1920/2)+x,y,0)));
+			}
+		}
+	}
+	
 	
 	private Vector2f[] getVecFromMatrix(Camera camera) {
 		Vector2f[]vecArray=new Vector2f[shadowPoints.size()];

@@ -78,4 +78,16 @@ public class Model {
 		return buffer;
 	}
 
+
+	public float[] getVertices() {
+		return vertices;
+	}
+
+
+	public void setVertices(float[] vertices) {
+		this.vertices = vertices;
+	}
+	
+	
+
 }

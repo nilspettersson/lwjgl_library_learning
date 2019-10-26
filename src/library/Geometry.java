@@ -25,7 +25,7 @@ public abstract class Geometry {
 		this.color=color;
 	}
 	
-	
+	//m00 width m11=height
 	public void translate(Vector3f vec,float width,float height ) {
 		position=new Matrix4f();
 		position.translate(vec).scale(width, height, 0);

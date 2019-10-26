@@ -47,8 +47,6 @@ public class Lights {
 		
 	
 		shadows=new Shadows();
-		shadows.addShadowPoint(0, 0);
-		shadows.addShadowPoint(100, 0);
 		
 	}
 	
@@ -196,6 +194,27 @@ public class Lights {
 		Point b = a.getLocation();
 		
 		return b;
+	}
+
+	
+	
+	
+	
+	
+	public Shadows getShadows() {
+		return shadows;
+	}
+
+	public void setShadows(Shadows shadows) {
+		this.shadows = shadows;
+	}
+
+	public ArrayList<Particle> getLights() {
+		return lights;
+	}
+
+	public void setLights(ArrayList<Particle> lights) {
+		this.lights = lights;
 	}
 	
 	
