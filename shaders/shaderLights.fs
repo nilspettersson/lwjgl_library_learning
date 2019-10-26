@@ -3,20 +3,16 @@
 
 varying vec2 tex_coords;
 
-uniform float x;
-uniform float y;
+
 
 
 uniform int size;
-uniform vec4[1000] location;
+uniform vec4[100] location;
+
+uniform vec2[100] shadowPoints;
+uniform int shadowPointsSize;
 
 
-
-float random (vec2 st) {
-    return fract(sin(dot(st.xy,
-                         vec2(12.9898,78.233)))*
-        43758.5453123*x);
-}
 
 
 float map(float value, float min1, float max1, float min2, float max2){
@@ -36,7 +32,20 @@ float det(float a,float b,float c,float d){
 }
 
 bool lineIntersection(float x1,float y1,float x2,float y2, float x3,float y3, float x4,float y4){
-	
+	if(x1-x2==0){
+		float xdif=x4-x3;
+		float ydif=y4-y3;
+		float k=ydif/xdif;
+		float m=-k*x3+y3;
+		float y=k*x2+m;
+		
+		if(y>min(y1,y2) && y<max(y1,y2) && x1>=min(x3,x4) && x1<=max(x3,x4)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	float det1And2=det(x1,y1,x2,y2);
 	float det3And4=det(x3,y3,x4,y4);
@@ -83,11 +92,14 @@ void main(){
 		float xdif=location[i].x-l.x;
 		float ydif=location[i].y-l.y;
 		float dis=((xdif*xdif)+(ydif*ydif));
-		if(lineIntersection(1, -0.7, 1.3, -0.5, l.x, l.y, location[i].x, location[i].y) || lineIntersection(1.2, 0.5, 2, 0, l.x, l.y, location[i].x, location[i].y)){
-			
+		bool inShadow=false;
+		for(int ii=0;ii<shadowPointsSize;ii+=2){
+			if(lineIntersection(shadowPoints[ii].x, shadowPoints[ii].y, shadowPoints[ii+1].x, shadowPoints[ii+1].y, l.x, l.y, location[i].x, location[i].y)){
+				inShadow=true;
+			}
 		}
-		else{
-			darkness-=1/(sqrt(sqrt(dis))*0.5);
+		if(inShadow==false){
+			darkness-=(1/(sqrt(sqrt(dis))*0.5))/(10);
 		}
 		
 	}
@@ -102,6 +114,10 @@ void main(){
 	}
 	
 	//gl_FragColor = vec4(0+extra*2,0+extra*2,0+extra*2,darkness+extra*2);
+	
+	
+	
+	
 	
 	
 	/*if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){

@@ -38,16 +38,24 @@ public class Lights {
 	private ArrayList<Particle> lights;
 	private Shader shader;
 	
+	private Shadows shadows;
+	
 	public Lights() {
 		lights=new ArrayList<Particle>();
 		shader=new Shader("shaderLights");
 		model=new Model(vertices, texture,indices);
+		
 	
+		shadows=new Shadows();
+		shadows.addShadowPoint(0, 0);
+		shadows.addShadowPoint(100, 0);
 		
 	}
 	
 	public void addLight(float x,float y) {
 		lights.add(new Particle(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0))));
+		
+		
 	}
 	
 	
@@ -174,6 +182,8 @@ public class Lights {
 		
 		shader.setUniform("location",getVecFromMatrix(camera));//the location of the lights for the shader.
 		
+		
+		shadows.render(camera, position, shader);
 		
 		
 		

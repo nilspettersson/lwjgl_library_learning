@@ -87,8 +87,8 @@ public class main {
 		
 		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
-		for(int i=0;i<10;i++) {
-			rect.add(new Rect(new Vector3f((float)(Math.random()*100),-(float)(Math.random()*100),0),10, 10, new Vector4f(1f,0f,0f,1f)));
+		for(int i=0;i<1;i++) {
+			rect.add(new Rect(new Vector3f((float)(Math.random()*100),-(float)(Math.random()*100),0),100, 100, new Vector4f(1f,0f,0f,1f)));
 		}
 		
 		
@@ -106,7 +106,7 @@ public class main {
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
-			Window.drawInit(new Vector4f(0, 0, 1, 1));
+			Window.drawInit(new Vector4f(0.5f, 0.5f, 0.5f, 1));
 			
 			long first = System.nanoTime() /1000000;
 			
@@ -221,12 +221,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		System.out.println(cap);
+		//System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		System.out.println(dif);
+		//System.out.println(dif);
 	}
 }
 	

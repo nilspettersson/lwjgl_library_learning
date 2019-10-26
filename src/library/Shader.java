@@ -104,6 +104,19 @@ public class Shader {
 		}
 	}
 	
+	public void setUniform(String name,Vector2f[] vec) {
+		int location=glGetUniformLocation(program, name);
+		FloatBuffer buffer=BufferUtils.createFloatBuffer(vec.length*2);
+		for(int i=0;i<vec.length;i++) {
+			buffer.put(vec[i].x);
+			buffer.put(vec[i].y);
+		}
+		buffer.flip();
+		if(location!=-1) {
+			glUniform2fv(location, buffer);
+		}
+	}
+	
 	
 	
 	
