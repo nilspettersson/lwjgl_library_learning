@@ -78,7 +78,7 @@ void main(){
 	l.y=(l.y-1080/2)/(1080/2);
 	
 	
-	float light=0;
+	float darkness=1;
 	for(int i=0;i<size;i++){
 		float xdif=location[i].x-l.x;
 		float ydif=location[i].y-l.y;
@@ -87,13 +87,21 @@ void main(){
 			
 		}
 		else{
-			light+=1/(sqrt(dis)*400);
+			darkness-=1/(sqrt(sqrt(dis))*0.5);
 		}
 		
 	}
 	
+	float extra;
+	if(darkness<0){
+		extra-=darkness;
+		gl_FragColor = vec4(1,1,1,(extra-4)/10);
+	}
+	else{
+		gl_FragColor = vec4(0,0,0,darkness);
+	}
 	
-	gl_FragColor = vec4(light,light/3,0.4,light);
+	//gl_FragColor = vec4(0+extra*2,0+extra*2,0+extra*2,darkness+extra*2);
 	
 	
 	/*if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){

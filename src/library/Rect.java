@@ -25,13 +25,11 @@ public class Rect extends Geometry {
 	static Model model=new Model(vertices, tex_coords, indices);
 	
 	
-	private Vector4f color=new Vector4f(0,0,0,0);
 	private float height;
 	private float width;
 	
 	public Rect(Vector3f position,float width,float height,Vector4f color) {
-		super();
-		this.color=color;
+		super(color);
 		this.width=width;
 		this.height=height;
 		translate(position,width,height);
@@ -39,6 +37,7 @@ public class Rect extends Geometry {
 		setModel(createModel());
 		setTexture(createTexture());
 	}
+	
 
 	@Override
 	public Model createModel() {
@@ -52,6 +51,8 @@ public class Rect extends Geometry {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 	
 

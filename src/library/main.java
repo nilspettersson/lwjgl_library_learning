@@ -87,8 +87,8 @@ public class main {
 		
 		ArrayList<Geometry>rect=new ArrayList<Geometry>();
 		
-		for(int i=0;i<1;i++) {
-			rect.add(new Rect(new Vector3f((float)(Math.random()*0),-(float)(Math.random()*0),0),10, 10, new Vector4f(1f,1f,1f,1f)));
+		for(int i=0;i<10;i++) {
+			rect.add(new Rect(new Vector3f((float)(Math.random()*100),-(float)(Math.random()*100),0),10, 10, new Vector4f(1f,0f,0f,1f)));
 		}
 		
 		
@@ -99,13 +99,14 @@ public class main {
 			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250);
 		}*/
 		
-		lights.particleSystemInit(101, 1, 0, 0, 50, 50, 100);
-		lights.setStartVel(0, 0, 0.0f, 0.0f);
+		lights.particleSystemInit(1000, 1, 0, 0, 0, 0,4000);
+		lights.setStartVel(0, 0, 0f, 0f);
 		
+		boolean down=false;
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
-			Window.drawInit();
+			Window.drawInit(new Vector4f(0, 0, 1, 1));
 			
 			long first = System.nanoTime() /1000000;
 			
@@ -118,11 +119,12 @@ public class main {
 			
 			
 			
-			s.bind();
-			s.setUniform("color", new Vector4f(1,1,0,1));
+			//s.bind();
+			//s.setUniform("color", new Vector4f(1,1,0,1));
+			
 			for(int i=0;i<rect.size();i++) {
 				//rect.get(i).translate(new Vector3f(1920/4, -1080/4, 0));
-				rect.get(i).render(camera,s);
+				rect.get(i).render(camera);
 			}
 			
 			
@@ -150,6 +152,15 @@ public class main {
 			lights.setParticleY(-getMouse().y+1080/2);
 			
 			//lights.addForce(0f, 0.01f);
+			
+			if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
+				down=true;
+				lights.particleAdd();
+			}
+			else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
+				down=false;
+			}
+			
 			lights.particleUpdate();
 			lights.render(camera);
 			
@@ -184,7 +195,7 @@ public class main {
 	static int myFps=0;
 	public static void update(long f,long l) {
 		
-		int fps=120*10;
+		int fps=120;
 		//setting up the fps cap.
 	double cap = (1.0/fps)*1000;
 	

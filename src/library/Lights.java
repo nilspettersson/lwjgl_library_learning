@@ -100,15 +100,6 @@ public class Lights {
 	
 	
 	public void particleUpdate() {
-		if(lights.size()<particleMax-particlesPerFrame) {
-			for(int i=0;i<particlesPerFrame;i++) {
-				addLight(particleX+(float)(Math.random()*particleRandomX)-particleRandomX/2, particleY+(float)(Math.random()*particleRandomY)-particleRandomY/2);
-				lights.get(lights.size()-1).setLifeTime(lifeTime);
-				lights.get(lights.size()-1).setxVel(particleXVel+(float)(Math.random()*particleRandomXVel)-particleRandomXVel/2);
-				lights.get(lights.size()-1).setyVel(particleYVel+(float)(Math.random()*particleRandomYVel)-particleRandomYVel/2);
-			}
-		}
-		
 		for(int i=0;i<lights.size();i++) {
 			translate(i, lights.get(i).position.m30+lights.get(i).getxVel(), lights.get(i).position.m31+lights.get(i).getyVel());
 			lights.get(i).setLifeTime(lights.get(i).getLifeTime()-1);
@@ -119,6 +110,16 @@ public class Lights {
 			}
 		}
 		
+	}
+	public void particleAdd() {
+		if(lights.size()<particleMax-particlesPerFrame) {
+			for(int i=0;i<particlesPerFrame;i++) {
+				addLight(particleX+(float)(Math.random()*particleRandomX)-particleRandomX/2, particleY+(float)(Math.random()*particleRandomY)-particleRandomY/2);
+				lights.get(lights.size()-1).setLifeTime(lifeTime);
+				lights.get(lights.size()-1).setxVel(particleXVel+(float)(Math.random()*particleRandomXVel)-particleRandomXVel/2);
+				lights.get(lights.size()-1).setyVel(particleYVel+(float)(Math.random()*particleRandomYVel)-particleRandomYVel/2);
+			}
+		}
 	}
 	
 	public void addForce(float x,float y) {
@@ -169,7 +170,7 @@ public class Lights {
 		
 		shader.setUniform("size", lights.size());
 		
-		translate(0,getMouse().x,-getMouse().y+1080/2);
+		//translate(0,getMouse().x,-getMouse().y+1080/2);
 		
 		shader.setUniform("location",getVecFromMatrix(camera));//the location of the lights for the shader.
 		

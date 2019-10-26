@@ -7,16 +7,23 @@ import org.joml.Vector4f;
 public abstract class Geometry {
 	private Model model;
 	private Texture texture;
-	
+	private static Shader shader=new Shader("shaderSimple");
 	
 	private Matrix4f position=new Matrix4f(); 
 	
-	public Geometry() {
-		
+	private Vector4f color;
+	
+	public Geometry(Vector4f color) {
+		this.color=color;
 	}
 	
 	public abstract Model createModel();
 	public abstract Texture createTexture();
+	
+	
+	public void setColor(Vector4f color) {
+		this.color=color;
+	}
 	
 	
 	public void translate(Vector3f vec,float width,float height ) {
@@ -25,10 +32,11 @@ public abstract class Geometry {
 	}
 	
 	
-	public void render(Camera camera, Shader shader) {
+	public void render(Camera camera) {
 		shader.bind();
 		
 		
+		shader.setUniform("color", color);
 		
 		shader.setUniform("projection", camera.getProjection().mul(position));
 		model.render();
@@ -58,6 +66,15 @@ public abstract class Geometry {
 	public void setPosition(Matrix4f position) {
 		this.position = position;
 	}
+
+	public static Shader getShader() {
+		return shader;
+	}
+
+	public static void setShader(Shader shader) {
+		Geometry.shader = shader;
+	}
+	
 	
 	
 
