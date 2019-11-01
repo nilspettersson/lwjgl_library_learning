@@ -127,14 +127,13 @@ void main(){
 	l.y=(l.y-1080/2)/(1080/2);
 	
 	
-	float darkness=1;
+	float darkness=0;
 	for(int i=0;i<size;i++){
 		float xdif=location[i].x-l.x;
 		float ydif=location[i].y-l.y;
 		float dis=((xdif*xdif)+(ydif*ydif));
 		bool inShadow=false;
 		
-		if(dis<15){
 			for(int ii=0;ii<shadowPointsSize;ii+=2){
 				vec2 point=lineIntersection2(shadowPoints[ii].x, shadowPoints[ii].y, shadowPoints[ii+1].x, shadowPoints[ii+1].y, l.x, l.y, location[i].x, location[i].y);
 				if(point.x!=1000 && point.y!=1000){
@@ -153,23 +152,22 @@ void main(){
 				
 				
 			}
-		}
 		if(inShadow==false){
-			darkness-=(1/(sqrt(sqrt(dis))*0.5))/(10);
+			darkness+=(dis)/(100);
 		}
 		
 	}
 	
 	float extra;
-	if(darkness<0){
+	/*if(darkness<0){
 		extra-=darkness;
 		gl_FragColor = vec4(1,1,1,(extra-4)/10);
 	}
 	else{
 		gl_FragColor = vec4(0,0,0,darkness);
-	}
+	}*/
 	
-	//gl_FragColor = vec4(0+extra*2,0+extra*2,0+extra*2,darkness+extra*2);
+	gl_FragColor = vec4(0,0,0,darkness);
 	
 	
 	

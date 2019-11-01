@@ -19,7 +19,7 @@ public class Shadows {
 		shadowPoints.add(new Matrix4f().translate(new Vector3f((1920/2)+x,y,0)));
 	}
 	
-	public void shadowFromGeometry(Geometry geometry, Camera camera) {
+	public void shadowFromGeometry(Entity geometry, Camera camera) {
 		Matrix4f temp=geometry.getPosition();
 		
 		float[] vertices=geometry.getModel().getVertices();

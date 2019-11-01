@@ -4,7 +4,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-public abstract class Geometry {
+public abstract class Entity {
 	private Model model;
 	private Texture texture;
 	private static Shader shader=new Shader("shaderSimple");
@@ -13,7 +13,7 @@ public abstract class Geometry {
 	
 	private Vector4f color;
 	
-	public Geometry(Vector4f color) {
+	public Entity(Vector4f color) {
 		this.color=color;
 	}
 	
@@ -72,7 +72,7 @@ public abstract class Geometry {
 	}
 
 	public static void setShader(Shader shader) {
-		Geometry.shader = shader;
+		Entity.shader = shader;
 	}
 	
 	
