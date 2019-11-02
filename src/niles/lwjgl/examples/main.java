@@ -9,6 +9,8 @@ import niles.lwjgl.light.Lights;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Shader;
 import niles.lwjgl.world.Camera;
+import niles.lwjgl.world.MouseCursor;
+import niles.lwjgl.world.Window;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.joml.Window;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -109,7 +110,7 @@ public class main {
 		}
 		
 		for(int i=0;i<rect.size();i++) {
-			lights.getShadows().shadowFromGeometry(rect.get(i),camera);
+			lights.getShadows().shadowFromGeometry(rect.get(i));
 		}
 		
 		
@@ -119,9 +120,6 @@ public class main {
 		lights.setZ(1);
 		
 		
-		//glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-		//glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		//glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		
 		boolean down=false;
 		
@@ -130,23 +128,9 @@ public class main {
 		
 		
 		
-		 boolean mouseLocked = false;
-	        double newX = 1920/2;
-	        double newY = 1080/2;
-
-	        double prevX = 0;
-	        double prevY = 0;
-
-	        boolean rotX = false;
-	        boolean rotY = false;
+	    MouseCursor m=new MouseCursor();
 	        
-	        float myX=0;
-	        float myY=0;
-
-	        glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		
-		
-	        
+		m.setMouseVisible(win, false);
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
@@ -163,9 +147,6 @@ public class main {
 			
 			
 			
-			//s.bind();
-			//s.setUniform("color", new Vector4f(1,1,0,1));
-			
 			
 			 
 
@@ -174,9 +155,12 @@ public class main {
 			        if(lights.getZ()>0.06 || dy<0) {
 			        	//lights.setZ(lights.getZ()+(float)-dy/40);
 			        	LightAdd((float) dy/10);
+			        	
 			        }
 			    }
 			});
+			
+			
 			
 			
 			lightSpeed/=1.05;
@@ -186,43 +170,14 @@ public class main {
 			
 			
 			
-                DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
-                DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
-
-                glfwGetCursorPos(win.getWindow(), x, y);
-                x.rewind();
-                y.rewind();
-
-                newX = x.get();
-                newY = y.get();
-
-                double deltaX = newX - 1920/2;
-                double deltaY = newY - 1080/2;
-
-                rotX = newX != prevX;
-                rotY = newY != prevY;
-
-
-                prevX = newX;
-                prevY = newY;
-
-
-                
-                myX+=deltaX;
-                myY+=deltaY;
-
-                glfwSetCursorPos(win.getWindow(), 1920/2, 1080/2);
+			
+			
+			m.moveCamera(win,camera,0.4f);
 			
 			
 			
-			
-			
-			camera.setPosition(new Vector3f(-(float)myX,(float)myY,0));
-			
-			
-			
-			lights.setParticleX(myX);
-			lights.setParticleY(-myY);
+			lights.setParticleX(m.getX());
+			lights.setParticleY(-m.getY());
 			
 			//lights.addForce(0f, 0.01f);
 			
@@ -236,7 +191,7 @@ public class main {
 			
 			
 			if(lights.getLights().size()>0) {
-				lights.translate(0,(float)myX+1920/2,-(float)myY);
+				lights.translate(0,(float)m.getX()+1920/2,-(float)m.getY());
 			}
 			
 			

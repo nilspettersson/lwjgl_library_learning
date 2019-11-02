@@ -1,9 +1,10 @@
-package org.joml;
+package niles.lwjgl.world;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 
 public class Window {

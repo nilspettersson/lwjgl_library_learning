@@ -10,6 +10,8 @@ public class Camera {
 	private float width;
 	private float height;
 	
+	private float scale=1;
+	
 	public Camera(float width,float height) {
 		this.width=width;
 		this.height=height;
@@ -27,7 +29,7 @@ public class Camera {
 	}
 	public Matrix4f getProjection() {
 		Matrix4f target=new Matrix4f();
-		Matrix4f pos=new Matrix4f().setTranslation(position);
+		Matrix4f pos=new Matrix4f().setTranslation(position).scale(scale);
 		
 		target=projection.mul(pos,target);
 		return target;
@@ -51,6 +53,14 @@ public class Camera {
 
 	public void setHeight(float height) {
 		this.height = height;
+	}
+
+	public float getScale() {
+		return scale;
+	}
+
+	public void setScale(float scale) {
+		this.scale = scale;
 	}
 	
 	
