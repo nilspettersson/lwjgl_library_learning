@@ -1,3 +1,4 @@
+package niles.lwjgl.util;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
 
@@ -57,13 +58,13 @@ public class Texture {
 	
 	
 	
-	public Texture(String text,boolean nothing) {
-		BufferedImage image=new BufferedImage(200, 200, BufferedImage.TYPE_4BYTE_ABGR);
+	public Texture(String text,int w,int h,Font font) {
+		BufferedImage image=new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g=image.createGraphics();
-		g.setFont(new Font("", Font.BOLD, 80));
-			g.drawString(text, 200/2-40, 200/2-40);
-			width=image.getWidth();
-			height=image.getHeight();
+		g.setFont(font);
+		g.drawString(text,0, h);
+		width=image.getWidth();
+		height=image.getHeight();
 			
 			int[] pixelsRaw=new int[width*height*4];
 			pixelsRaw=image.getRGB(0, 0, width, height, null, 0, width);

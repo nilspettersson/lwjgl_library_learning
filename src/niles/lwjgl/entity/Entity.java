@@ -1,8 +1,13 @@
-package library;
+package niles.lwjgl.entity;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+
+import niles.lwjgl.util.Model;
+import niles.lwjgl.util.Shader;
+import niles.lwjgl.util.Texture;
+import niles.lwjgl.world.Camera;
 
 public abstract class Entity {
 	private Model model;

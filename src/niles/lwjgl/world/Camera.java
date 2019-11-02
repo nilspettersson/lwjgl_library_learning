@@ -1,4 +1,4 @@
-package library;
+package niles.lwjgl.world;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

@@ -1,4 +1,4 @@
-package library;
+package niles.lwjgl.light;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -9,6 +9,10 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+
+import niles.lwjgl.util.Model;
+import niles.lwjgl.util.Shader;
+import niles.lwjgl.world.Camera;
 
 public class Lights {
 	float[] vertices=new float[] {
@@ -52,7 +56,7 @@ public class Lights {
 		
 		
 		z=1;
-		ambient=new Vector3f(0,0,0.1f);
+		ambient=new Vector3f(0,0,0);
 		
 	}
 	

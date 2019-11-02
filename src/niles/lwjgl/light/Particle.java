@@ -1,4 +1,4 @@
-package library;
+package niles.lwjgl.light;
 
 import org.joml.Matrix4f;
 

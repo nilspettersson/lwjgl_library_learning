@@ -1,7 +1,14 @@
-package library;
+package niles.lwjgl.examples;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.WGL;
+
+import niles.lwjgl.entity.Entity;
+import niles.lwjgl.entity.Rect;
+import niles.lwjgl.light.Lights;
+import niles.lwjgl.util.Model;
+import niles.lwjgl.util.Shader;
+import niles.lwjgl.world.Camera;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -19,6 +26,7 @@ import java.util.ArrayList;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+import org.joml.Window;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -163,7 +171,6 @@ public class main {
 
 			glfwSetScrollCallback(win.getWindow(), new GLFWScrollCallback() {
 			    @Override public void invoke (long win, double dx, double dy) {
-			        System.out.println(dy);
 			        if(lights.getZ()>0.06 || dy<0) {
 			        	//lights.setZ(lights.getZ()+(float)-dy/40);
 			        	LightAdd((float) dy/10);

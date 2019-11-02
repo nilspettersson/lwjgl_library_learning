@@ -1,4 +1,4 @@
-package library;
+package niles.lwjgl.util;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
