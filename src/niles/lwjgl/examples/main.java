@@ -110,14 +110,14 @@ public class main {
 		}
 		
 		for(int i=0;i<rect.size();i++) {
-			lights.getShadows().shadowFromGeometry(rect.get(i));
+			//lights.getShadows().shadowFromGeometry(rect.get(i));
 		}
 		
 		
 		
-		lights.particleSystemInit(1000, 1, 0, 0, 0, 0,4000,0.1f);
-		lights.setStartVel(0, 0, 0f, 0f);
-		lights.setZ(1);
+		//lights.particleSystemInit(10, 1, 0, 0, 0, 0,11,0.01f);
+		//lights.setStartVel(0, 0f, 40f, 40f);
+		lights.setZ(1f);
 		
 		
 		
@@ -172,18 +172,18 @@ public class main {
 			
 			
 			
-			m.moveCamera(win,camera,0.4f);
+			m.moveCamera(win,camera,0.8f);
 			
 			
 			
 			lights.setParticleX(m.getX());
 			lights.setParticleY(-m.getY());
 			
-			//lights.addForce(0f, 0.01f);
+			
 			
 			if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
 				down=true;
-				lights.particleAdd();
+				lights.addLight(m.getX(), -m.getY(), 0.1f);
 			}
 			else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
 				down=false;
@@ -198,7 +198,9 @@ public class main {
 			
 			
 			
-			lights.particleUpdate();
+			//lights.particleUpdate();
+			//lights.particleAdd();
+			//lights.addForce(10f, 10f);
 			lights.render(camera);
 			
 			

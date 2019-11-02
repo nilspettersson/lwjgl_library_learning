@@ -7,10 +7,10 @@ varying vec2 tex_coords;
 
 
 uniform int size;
-uniform vec4[100] location;  //light locations
+uniform vec4[900] location;  //light locations
 uniform vec3 ambient;
 
-uniform vec2[900] shadowPoints;
+uniform vec2[100] shadowPoints;
 uniform int shadowPointsSize;
 
 
