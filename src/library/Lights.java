@@ -30,7 +30,6 @@ public class Lights {
 	};
 	
 	
-	
 	private Model model;
 	//private Matrix4f position=new Matrix4f(); 
 	
@@ -40,6 +39,9 @@ public class Lights {
 	
 	private Shadows shadows;
 	
+	private float z;
+	private Vector3f ambient;
+	
 	public Lights() {
 		lights=new ArrayList<Particle>();
 		shader=new Shader("shaderLights");
@@ -48,11 +50,14 @@ public class Lights {
 	
 		shadows=new Shadows();
 		
+		
+		z=1;
+		ambient=new Vector3f(0,0,0.1f);
+		
 	}
 	
-	public void addLight(float x,float y) {
-		lights.add(new Particle(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0))));
-		
+	public void addLight(float x,float y,float intensity) {
+		lights.add(new Particle(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0)),intensity));
 		
 	}
 	
@@ -64,12 +69,13 @@ public class Lights {
 	private float particleRandomX=0;
 	private float particleRandomY=0;
 	private float lifeTime=0;
+	private float particleIntesity=0;
 	
 	private float particleXVel=0;
 	private float particleYVel=0;
 	private float particleRandomXVel=0;
 	private float particleRandomYVel=0;
-	public void particleSystemInit(int particleMax,int particlesPerFrame, float particleX,float particleY,float particleRandomX,float particleRandomY,float lifeTime) {
+	public void particleSystemInit(int particleMax,int particlesPerFrame, float particleX,float particleY,float particleRandomX,float particleRandomY,float lifeTime, float particleIntesity) {
 		this.particleMax=particleMax;
 		this.particlesPerFrame=particlesPerFrame;
 		this.particleX=particleX;
@@ -77,7 +83,7 @@ public class Lights {
 		this.particleRandomX=particleRandomX;
 		this.particleRandomY=particleRandomY;
 		this.lifeTime=lifeTime;
-		
+		this.particleIntesity=particleIntesity;
 		
 		
 	}
@@ -120,7 +126,7 @@ public class Lights {
 	public void particleAdd() {
 		if(lights.size()<particleMax-particlesPerFrame) {
 			for(int i=0;i<particlesPerFrame;i++) {
-				addLight(particleX+(float)(Math.random()*particleRandomX)-particleRandomX/2, particleY+(float)(Math.random()*particleRandomY)-particleRandomY/2);
+				addLight(particleX+(float)(Math.random()*particleRandomX)-particleRandomX/2, particleY+(float)(Math.random()*particleRandomY)-particleRandomY/2,particleIntesity);
 				lights.get(lights.size()-1).setLifeTime(lifeTime);
 				lights.get(lights.size()-1).setxVel(particleXVel+(float)(Math.random()*particleRandomXVel)-particleRandomXVel/2);
 				lights.get(lights.size()-1).setyVel(particleYVel+(float)(Math.random()*particleRandomYVel)-particleRandomYVel/2);
@@ -134,6 +140,11 @@ public class Lights {
 		}
 	}
 
+	public void setIntensity(float intensity) {
+		for(int i=0;i<lights.size();i++) {
+			lights.get(i).setIntensity(intensity);
+		}
+	}
 	
 	
 	
@@ -147,7 +158,8 @@ public class Lights {
 		Vector4f[]vecArray=new Vector4f[lights.size()];
 		for(int i=0;i<lights.size();i++) {
 			Matrix4f send=camera.getProjection().mul(lights.get(i).position);
-			Vector4f vector=new Vector4f(send.m30*1.77777777f,send.m31,send.m32,send.m33);
+			
+			Vector4f vector=new Vector4f(send.m30*1.77777777f,send.m31,z,lights.get(i).getIntensity());//x  y  z  intensity
 			vecArray[i]=vector;
 		}
 		return vecArray;
@@ -175,6 +187,8 @@ public class Lights {
 		shader.setUniform("projection", tempCamera.getProjection().mul(position));
 		
 		shader.setUniform("size", lights.size());
+		shader.setUniform("ambient", ambient);
+		
 		
 		//translate(0,getMouse().x,-getMouse().y+1080/2);
 		
@@ -216,6 +230,26 @@ public class Lights {
 	public void setLights(ArrayList<Particle> lights) {
 		this.lights = lights;
 	}
+	
+	
+	
+
+	public float getZ() {
+		return z;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
+	}
+
+	public Vector3f getAmbient() {
+		return ambient;
+	}
+
+	public void setAmbient(Vector3f ambient) {
+		this.ambient = ambient;
+	}
+	
 	
 	
 

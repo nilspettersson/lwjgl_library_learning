@@ -20,6 +20,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 
 public class main {
@@ -96,17 +97,18 @@ public class main {
 		
 		Lights lights=new Lights();
 		for(int i=0;i<1;i++) {
-			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250);
+			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.1f);
 		}
 		
 		for(int i=0;i<rect.size();i++) {
-			//lights.getShadows().shadowFromGeometry(rect.get(i),camera);
+			lights.getShadows().shadowFromGeometry(rect.get(i),camera);
 		}
 		
 		
 		
-		lights.particleSystemInit(1000, 1, 0, 0, 0, 0,4000);
+		lights.particleSystemInit(1000, 1, 0, 0, 0, 0,4000,0.1f);
 		lights.setStartVel(0, 0, 0f, 0f);
+		lights.setZ(1);
 		
 		
 		//glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
@@ -136,6 +138,7 @@ public class main {
 	        glfwSetInputMode(win.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		
 		
+	        
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
@@ -156,9 +159,23 @@ public class main {
 			//s.setUniform("color", new Vector4f(1,1,0,1));
 			
 			
+			 
+
+			glfwSetScrollCallback(win.getWindow(), new GLFWScrollCallback() {
+			    @Override public void invoke (long win, double dx, double dy) {
+			        System.out.println(dy);
+			        if(lights.getZ()>0.06 || dy<0) {
+			        	//lights.setZ(lights.getZ()+(float)-dy/40);
+			        	LightAdd((float) dy/10);
+			        }
+			    }
+			});
 			
 			
-			
+			lightSpeed/=1.05;
+			if(lights.getZ()>0.06 || lightSpeed<0) {
+	        	lights.setZ(lights.getZ()+(float)-lightSpeed/40);
+	        }
 			
 			
 			
@@ -191,23 +208,6 @@ public class main {
 			
 			
 			
-                
-                
-			
-			//shader.bind();
-			
-			
-			//Y = (X-A)/(B-A) * (D-C) + C
-			/*float xx=(float)getMouse().getX();
-			float yy=(float)getMouse().getY();
-			
-			float xxx=(xx-0)/(1920-0) * (1.777f-(0));
-			float yyy=(yy-0)/(1080-0) * (-1-0)+1;*/
-			
-			//shader.setUniform("x",xxx);
-			//shader.setUniform("y",yyy);
-			
-			//model.render();
 			
 			
 			camera.setPosition(new Vector3f(-(float)myX,(float)myY,0));
@@ -236,7 +236,8 @@ public class main {
 			
 			
 			
-			
+			lights.particleUpdate();
+			lights.render(camera);
 			
 			
 			
@@ -248,8 +249,7 @@ public class main {
 			
 			
 			
-			lights.particleUpdate();
-			lights.render(camera);
+			
 			
 			
 			
@@ -261,6 +261,12 @@ public class main {
 		glfwTerminate();
 		
 	}
+	
+	static float lightSpeed=1;
+    
+    public static void LightAdd(float x) {
+    	lightSpeed+=x;
+    }
 	
 	
 	static int myFps=0;

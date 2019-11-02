@@ -117,6 +117,13 @@ public class Shader {
 		}
 	}
 	
+	public void setUniform(String name,Vector3f vec) {
+		int location=glGetUniformLocation(program, name);
+		if(location!=-1) {
+			glUniform3f(location, vec.x, vec.y,vec.z);
+		}
+	}
+	
 	
 	
 	

@@ -8,8 +8,11 @@ public class Particle {
 	private float xVel;
 	private float yVel;
 	private float lifeTime;
+	private float intensity;
 	
-	public Particle(Matrix4f matrix) {
+	public Particle(Matrix4f matrix, float intensity) {
+		this.intensity=intensity;
+		
 		position=matrix;
 		xVel=0;
 		yVel=0;
@@ -49,6 +52,16 @@ public class Particle {
 
 	public void setyVel(float yVel) {
 		this.yVel = yVel;
+	}
+
+
+	public float getIntensity() {
+		return intensity;
+	}
+
+
+	public void setIntensity(float intensity) {
+		this.intensity = intensity;
 	}
 	
 	

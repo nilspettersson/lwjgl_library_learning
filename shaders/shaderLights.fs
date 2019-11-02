@@ -7,7 +7,8 @@ varying vec2 tex_coords;
 
 
 uniform int size;
-uniform vec4[100] location;
+uniform vec4[100] location;  //light locations
+uniform vec3 ambient;
 
 uniform vec2[900] shadowPoints;
 uniform int shadowPointsSize;
@@ -127,24 +128,26 @@ void main(){
 	l.y=(l.y-1080/2)/(1080/2);
 	
 	
-	float darkness=0;
+	
+	
+	float darkness=1;
 	for(int i=0;i<size;i++){
 		float xdif=location[i].x-l.x;
 		float ydif=location[i].y-l.y;
-		float dis=((xdif*xdif)+(ydif*ydif));
+		float dis=((xdif*xdif)+(ydif*ydif)+(location[i].z*location[i].z));
 		bool inShadow=false;
-		
+		if(dis<100){
 			for(int ii=0;ii<shadowPointsSize;ii+=2){
 				vec2 point=lineIntersection2(shadowPoints[ii].x, shadowPoints[ii].y, shadowPoints[ii+1].x, shadowPoints[ii+1].y, l.x, l.y, location[i].x, location[i].y);
 				if(point.x!=1000 && point.y!=1000){
 					float xdif2=location[i].x-point.x;
 					float ydif2=location[i].y-point.y;
-					float dis2=(xdif2*xdif2)+(ydif2*ydif2);
+					float dis2=sqrt((xdif2*xdif2)+(ydif2*ydif2));
 					
 					float xdif3=l.x-point.x;
 					float ydif3=l.y-point.y;
-					float dis3=(xdif3*xdif3)+(ydif3*ydif3);
-					if(dis3<dis2){
+					float dis3=sqrt((xdif3*xdif3)+(ydif3*ydif3));
+					if(dis3*(location[i].z*location[i].z)<dis2){ //calculateing if it is in shadow or not.
 						inShadow=true;
 						break;
 					}
@@ -152,8 +155,9 @@ void main(){
 				
 				
 			}
+		}
 		if(inShadow==false){
-			darkness+=(dis)/(100);
+			darkness-=1/((dis/location[i].w*(1/location[i].z)));  //calulate amount of light.
 		}
 		
 	}
@@ -167,19 +171,13 @@ void main(){
 		gl_FragColor = vec4(0,0,0,darkness);
 	}*/
 	
-	gl_FragColor = vec4(0,0,0,darkness);
+	
+	
+	gl_FragColor = vec4(0+ambient.x,0+ambient.y,0+ambient.z,darkness);
 	
 	
 	
 	
-	
-	
-	/*if(lineIntersection(0.4, 0.2, 0.5, 0.5, l.x, l.y, location.x, location.y) || lineIntersection(0.7, 0.5, 0.9, 0.8, l.x, l.y, location.x, location.y)){
-		gl_FragColor = vec4(0,0,0,0);
-	}
-	else{
-		gl_FragColor = vec4(light,light/2,0.2,light);
-	}*/
 
 }
 
