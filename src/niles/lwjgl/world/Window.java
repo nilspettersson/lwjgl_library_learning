@@ -15,6 +15,9 @@ public class Window {
 	private int width;
 	private int height;
 	
+	
+	private Input input;
+	
 	public Window(int width,int height, boolean fullScreen) {
 		this.width=width;
 		this.height=height;
@@ -57,16 +60,32 @@ public class Window {
 		
 		glEnable(GL_TEXTURE_2D);
 		
+		
+		
+		input=new Input(this);
+		
 	}
 	
 	
 	public void swapBuffers() {
 		glfwSwapBuffers(window);
+		input.update();
 	}
 	
 	
 	
 	
+	
+	
+	
+	
+	public Input getInput() {
+		return input;
+	}
+
+
+
+
 	public long getWindow() {
 		return window;
 	}
@@ -90,12 +109,14 @@ public class Window {
 	
 	
 	
-	public static void drawInit(Vector4f clearColor) {
+	public void drawInit(Vector4f clearColor) {
 		glfwPollEvents();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
 		glClear(GL_COLOR_BUFFER_BIT);
+		
+		
 	}
 	
 	

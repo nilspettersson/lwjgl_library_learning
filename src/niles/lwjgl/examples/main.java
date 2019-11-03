@@ -9,7 +9,7 @@ import niles.lwjgl.light.Lights;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Shader;
 import niles.lwjgl.world.Camera;
-import niles.lwjgl.world.KeyEvent;
+import niles.lwjgl.world.Input;
 import niles.lwjgl.world.MouseCursor;
 import niles.lwjgl.world.Window;
 
@@ -103,7 +103,7 @@ public class main {
 		boolean down=false;
 		
 		
-		KeyEvent keys=new KeyEvent(win);
+		
 		
 		
 		
@@ -113,7 +113,7 @@ public class main {
 		
 		glfwSwapInterval(0);
 		while(!glfwWindowShouldClose(win.getWindow())) {
-			Window.drawInit(new Vector4f(0.8f, 0.8f, 0.8f, 1));
+			win.drawInit(new Vector4f(0.8f, 0.8f, 0.8f, 1));
 			
 			long first = System.nanoTime() /1000000;
 			
@@ -127,8 +127,8 @@ public class main {
 			
 			
 			
-			if(keys.isPressed(GLFW_KEY_0)) {
-				System.out.println("0");
+			if(win.getInput().isReleased(GLFW_KEY_ENTER)) {
+				System.out.println("button clicked");
 			}
 			 
 
@@ -245,12 +245,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		System.out.println(cap);
+		//System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		System.out.println(dif);
+		//System.out.println(dif);
 	}
 }
 	
