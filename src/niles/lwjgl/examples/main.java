@@ -200,7 +200,7 @@ public class main {
 			
 			
 			
-			win.swapBuffers();
+			win.clean();
 			
 			long last = System.nanoTime()/1000000;
 			update(first,last);

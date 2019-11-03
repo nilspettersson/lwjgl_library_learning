@@ -17,7 +17,7 @@ public class main2 {
 		
 		Entity rect=new Rect(new Vector3f(0, 0, 0), 100, 100, new Vector4f(1,1,1,1));
 		Lights light=new Lights(win);
-		light.addLight(0, 0, 2f);
+		light.addLight(0, 0, 1f);
 		light.setZ(1f);
 		
 		while(win.shouldClose()) {
@@ -42,7 +42,7 @@ public class main2 {
 			}
 			
 			light.getShadows().clearShadows();
-			win.swapBuffers();
+			win.clean();
 		}
 		
 	}

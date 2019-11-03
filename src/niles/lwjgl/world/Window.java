@@ -67,7 +67,7 @@ public class Window {
 	}
 	
 	
-	public void swapBuffers() {
+	public void clean() {
 		glfwSwapBuffers(window);
 		
 		
