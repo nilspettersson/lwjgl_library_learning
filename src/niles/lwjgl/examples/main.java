@@ -9,6 +9,7 @@ import niles.lwjgl.light.Lights;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Shader;
 import niles.lwjgl.world.Camera;
+import niles.lwjgl.world.KeyEvent;
 import niles.lwjgl.world.MouseCursor;
 import niles.lwjgl.world.Window;
 
@@ -35,7 +36,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 public class main {
 
 	public static void main(String[] args) {
-		Window win=new Window(1920, 1080);
+		Window win=new Window(1920/2, 1080/2);
 		
 		
 		
@@ -106,11 +107,11 @@ public class main {
 		
 		Lights lights=new Lights();
 		for(int i=0;i<1;i++) {
-			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.1f);
+			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,1f);
 		}
 		
 		for(int i=0;i<rect.size();i++) {
-			//lights.getShadows().shadowFromGeometry(rect.get(i));
+			lights.getShadows().shadowFromGeometry(rect.get(i));
 		}
 		
 		
@@ -124,7 +125,7 @@ public class main {
 		boolean down=false;
 		
 		
-		
+		KeyEvent keys=new KeyEvent(win);
 		
 		
 		
@@ -148,6 +149,9 @@ public class main {
 			
 			
 			
+			if(keys.isPressed(GLFW_KEY_0)) {
+				System.out.println("0");
+			}
 			 
 
 			glfwSetScrollCallback(win.getWindow(), new GLFWScrollCallback() {
@@ -166,6 +170,7 @@ public class main {
 			lightSpeed/=1.05;
 			if(lights.getZ()>0.06 || lightSpeed<0) {
 	        	lights.setZ(lights.getZ()+(float)-lightSpeed/40);
+	        	
 	        }
 			
 			
@@ -183,7 +188,7 @@ public class main {
 			
 			if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
 				down=true;
-				lights.addLight(m.getX(), -m.getY(), 0.1f);
+				lights.addLight(m.getX(), -m.getY(), 1f);
 			}
 			else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
 				down=false;

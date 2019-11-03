@@ -23,7 +23,7 @@ public class Window {
 		}
 		
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		window=glfwCreateWindow(1980, 1080, "", glfwGetPrimaryMonitor(), 0);
+		window=glfwCreateWindow(width, height, "", glfwGetPrimaryMonitor(), 0);
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");
 		}
