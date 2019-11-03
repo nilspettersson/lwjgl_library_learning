@@ -36,7 +36,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 public class main {
 
 	public static void main(String[] args) {
-		Window win=new Window(1920/2, 1080/2);
+		Window win=new Window(1920/2, 1080/2,false);
 		
 		
 		
@@ -83,9 +83,9 @@ public class main {
 		
 		Shader s=new Shader("shaderSimple");
 		
-		Lights lights=new Lights();
+		Lights lights=new Lights(win);
 		for(int i=0;i<1;i++) {
-			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,1f);
+			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.01f);
 		}
 		
 		for(int i=0;i<rect.size();i++) {
@@ -166,7 +166,7 @@ public class main {
 			
 			if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
 				down=true;
-				lights.addLight(m.getX(), -m.getY(), 1f);
+				lights.addLight(m.getX(), -m.getY(), 0.01f);
 			}
 			else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
 				down=false;
@@ -245,12 +245,12 @@ public class main {
 	if(dif<(1.0/fps)*1000) {
 		cap=(1000/cap);
 		myFps=(int) cap;
-		//System.out.println(cap);
+		System.out.println(cap);
 	}
 	else if(dif>=(1.0/fps)*1000) {
 		dif=(1000/dif);
 		myFps=(int) dif;
-		//System.out.println(dif);
+		System.out.println(dif);
 	}
 }
 	

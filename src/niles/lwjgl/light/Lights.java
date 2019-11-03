@@ -13,6 +13,7 @@ import org.joml.Vector4f;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Shader;
 import niles.lwjgl.world.Camera;
+import niles.lwjgl.world.Window;
 
 public class Lights {
 	float[] vertices=new float[] {
@@ -46,7 +47,10 @@ public class Lights {
 	private float z;
 	private Vector3f ambient;
 	
-	public Lights() {
+	
+	private Window window;  //used in shader to get correct width and height
+	
+	public Lights(Window window) {
 		lights=new ArrayList<Particle>();
 		shader=new Shader("shaderLights");
 		model=new Model(vertices, texture,indices);
@@ -58,6 +62,8 @@ public class Lights {
 		z=1;
 		ambient=new Vector3f(0,0,0);
 		
+		
+		this.window=window;
 	}
 	
 	public void addLight(float x,float y,float intensity) {
@@ -192,6 +198,8 @@ public class Lights {
 		
 		shader.setUniform("size", lights.size());
 		shader.setUniform("ambient", ambient);
+		
+		shader.setUniform("scale", new Vector2f(window.getWidth(),window.getHeight()));
 		
 		
 		//translate(0,getMouse().x,-getMouse().y+1080/2);

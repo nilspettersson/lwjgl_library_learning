@@ -5,6 +5,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 public class Window {
@@ -14,7 +15,7 @@ public class Window {
 	private int width;
 	private int height;
 	
-	public Window(int width,int height) {
+	public Window(int width,int height, boolean fullScreen) {
 		this.width=width;
 		this.height=height;
 		
@@ -23,14 +24,27 @@ public class Window {
 		}
 		
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		window=glfwCreateWindow(width, height, "", glfwGetPrimaryMonitor(), 0);
+		
+		if(fullScreen) {
+			window=glfwCreateWindow(width, height, "", glfwGetPrimaryMonitor(), 0);
+		}
+		else {
+			window=glfwCreateWindow(width, height, "", 0, 0);
+			
+			
+			GLFWVidMode videoMode=glfwGetVideoMode(glfwGetPrimaryMonitor());
+			glfwSetWindowPos(window, (videoMode.width()-width)/2, (videoMode.height()-height)/2);
+		}
+		
+		
+		
+		
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");
 		}
 		
 		
-		//GLFWVidMode videoMode=glfwGetVideoMode(glfwGetPrimaryMonitor());
-		//glfwSetWindowPos(window, (videoMode.width()-1920)/2, (videoMode.height()-1080)/2);
+		
 		
 		
 		glfwShowWindow(window);

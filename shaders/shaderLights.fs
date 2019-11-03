@@ -4,6 +4,8 @@
 varying vec2 tex_coords;
 
 
+uniform vec2 scale;
+
 
 
 uniform int size;
@@ -124,8 +126,8 @@ void main(){
 	
 	vec2 l = gl_FragCoord.xy;
 	
-	l.x=(l.x)/(1080/2);
-	l.y=(l.y-1080/2)/(1080/2);
+	l.x=(l.x)/(scale.y/2);
+	l.y=(l.y-scale.y/2)/(scale.y/2);
 	
 	
 	

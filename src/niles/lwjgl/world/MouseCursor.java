@@ -11,8 +11,8 @@ import org.lwjgl.BufferUtils;
 public class MouseCursor {
 	
 	
-     private double newX = 1920/2;
-     private double newY = 1080/2;
+     private double newX = 1920/4;
+     private double newY = 1080/4;
 
      private double prevX = 0;
      private double prevY = 0;
