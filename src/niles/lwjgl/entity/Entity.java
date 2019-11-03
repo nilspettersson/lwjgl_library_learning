@@ -36,6 +36,18 @@ public abstract class Entity {
 		position.translate(vec).scale(width, height, 0);
 	}
 	
+	public float getX() {
+		return position.m30;
+	}
+	public float getY() {
+		return position.m31;
+	}
+	
+	public void move(float x,float y) {
+		position.translate(new Vector3f(x, y, 0));
+	}
+	
+	
 	
 	public void render(Camera camera) {
 		shader.bind();

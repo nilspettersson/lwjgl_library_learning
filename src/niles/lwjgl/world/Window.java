@@ -69,11 +69,19 @@ public class Window {
 	
 	public void swapBuffers() {
 		glfwSwapBuffers(window);
+		
+		
 		input.update();
+		
+		if(input.isDown(GLFW_KEY_F12)) {
+			glfwSetWindowShouldClose(getWindow(), true);
+		}
 	}
 	
 	
-	
+	public boolean shouldClose(){
+		return !glfwWindowShouldClose(getWindow());
+	}
 	
 	
 	

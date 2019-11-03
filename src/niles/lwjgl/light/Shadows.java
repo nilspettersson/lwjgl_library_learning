@@ -76,5 +76,10 @@ public class Shadows {
 		
 	}
 	
+	
+	public void clearShadows() {
+		shadowPoints.clear();
+	}
+	
 
 }
