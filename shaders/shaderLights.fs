@@ -15,7 +15,7 @@ uniform int shadowPointsSize;
 
 
 
-
+//this function maps values.
 float map(float value, float min1, float max1, float min2, float max2){
 	float perc = (value - min1) / (max1 - min1);
 
@@ -27,7 +27,7 @@ float map(float value, float min1, float max1, float min2, float max2){
 
 
 
-
+//use in lineIntersection
 float det(float a,float b,float c,float d){
 	return a*d-b*c;
 }

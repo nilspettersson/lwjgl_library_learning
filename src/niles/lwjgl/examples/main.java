@@ -68,28 +68,6 @@ public class main {
 		//Texture text=new Texture(""+0, 200, 200, new Font("", Font.ITALIC, 20));
 		
 		
-		
-		float[] vertices2=new float[] {
-				-0.5f,0.5f,0,
-				0.5f,0.5f,0,
-				0.5f,-0.5f,0,
-				-0.5f,-0.5f,0
-				
-		};
-		float[] texture2=new float[] {
-				0,0,
-				1,0,
-				1,1,
-				0,1
-		};
-		int[] indices2=new int[] {
-				0,1,2,
-				2,3,0
-		};
-		
-		
-		
-		Model model2=new Model(vertices2, texture2,indices2);
 		Shader textShader=new Shader("text");
 		
 		
