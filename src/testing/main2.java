@@ -12,37 +12,40 @@ import niles.lwjgl.world.Window;
 public class main2 {
 
 	public static void main(String[] args) {
-		Window win=new Window(1920/2, 1080/2, false);
+		Window win=new Window(1920, 1080, true);
 		Camera camera=new Camera(1920, 1080);
 		
-		Entity rect=new Rect(new Vector3f(0, 0, 0), 100, 100, new Vector4f(1, 0, 0, 1));
+		Entity rect=new Rect(new Vector3f(0,0, 0), 200, 200, "res/wood_planks_old_0087_01.jpg");
 		
 		
 		Lights light=new Lights(win);
 		light.addLight(0, 0, 1f);
 		light.setZ(1f);
-		
+		glfwSwapInterval(0);
 		while(win.shouldClose()) {
-			win.drawInit(new Vector4f(0.5f,0.5f,0.5f,1));
-			light.getShadows().shadowFromGeometry(rect);
+			win.drawInit(new Vector4f(1f,1f,1f,1));
+			//light.getShadows().shadowFromGeometry(rect);
 			
-			light.render(camera);
+			
 			
 			rect.render(camera);
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
-				rect.move(-0.05f, 0);
+				rect.move(-0.01f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
-				rect.move(0.05f, 0);
+				rect.move(0.01f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_W)) {
-				rect.move(0, 0.05f);
+				rect.move(0, 0.01f);
 			}
 			if(win.getInput().isDown(GLFW_KEY_S)) {
-				rect.move(0, -0.05f);
+				rect.move(0, -0.01f);
 			}
 			
+			
+			
+			light.render(camera);
 			light.getShadows().clearShadows();
 			win.clean();
 		}

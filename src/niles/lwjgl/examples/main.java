@@ -36,7 +36,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 public class main {
 
 	public static void main(String[] args) {
-		Window win=new Window(1920/2, 1080/2,false);
+		Window win=new Window(1920, 1080,true);
 		
 		
 		
@@ -85,7 +85,7 @@ public class main {
 		
 		Lights lights=new Lights(win);
 		for(int i=0;i<1;i++) {
-			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.01f);
+			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,1f);
 		}
 		
 		for(int i=0;i<rect.size();i++) {
@@ -166,7 +166,7 @@ public class main {
 			
 			if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
 				down=true;
-				lights.addLight(m.getX(), -m.getY(), 0.01f);
+				lights.addLight(m.getX(), -m.getY(), 1f);
 			}
 			else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
 				down=false;
