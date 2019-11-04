@@ -29,16 +29,16 @@ public class main2 {
 			rect.render(camera);
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
-				rect.move(-0.1f, 0);
+				rect.move(-0.05f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
-				rect.move(0.1f, 0);
+				rect.move(0.05f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_W)) {
-				rect.move(0, 0.1f);
+				rect.move(0, 0.05f);
 			}
 			if(win.getInput().isDown(GLFW_KEY_S)) {
-				rect.move(0, -0.1f);
+				rect.move(0, -0.05f);
 			}
 			
 			light.getShadows().clearShadows();
