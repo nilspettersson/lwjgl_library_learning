@@ -15,7 +15,9 @@ public class main2 {
 		Window win=new Window(1920/2, 1080/2, false);
 		Camera camera=new Camera(1920, 1080);
 		
-		Entity rect=new Rect(new Vector3f(0, 0, 0), 100, 100, new Vector4f(1,1,1,1));
+		Entity rect=new Rect(new Vector3f(0, 0, 0), 100, 100, new Vector4f(1, 0, 0, 1));
+		
+		
 		Lights light=new Lights(win);
 		light.addLight(0, 0, 1f);
 		light.setZ(1f);

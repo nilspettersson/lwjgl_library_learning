@@ -23,7 +23,7 @@ public abstract class Entity {
 	}
 	
 	public abstract Model createModel();
-	public abstract Texture createTexture();
+	public abstract Texture createTexture(String textureName);
 	
 	
 	public void setColor(Vector4f color) {
@@ -50,6 +50,10 @@ public abstract class Entity {
 	
 	
 	public void render(Camera camera) {
+		if(texture!=null) {
+			texture.bind(0);
+		}
+		
 		shader.bind();
 		
 		
