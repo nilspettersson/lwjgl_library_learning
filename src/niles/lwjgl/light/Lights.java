@@ -104,7 +104,7 @@ public class Lights {
 		
 		
 	}
-	public void setStartVel(float particleXVel,float particleYVel,float particleRandomXVel,float particleRandomYVel) {
+	public void ParticleSetStartVel(float particleXVel,float particleYVel,float particleRandomXVel,float particleRandomYVel) {
 		this.particleXVel=particleXVel;
 		this.particleYVel=particleYVel;
 		this.particleRandomXVel=particleRandomXVel;
@@ -151,13 +151,13 @@ public class Lights {
 		}
 	}
 	
-	public void addForce(float x,float y) {
+	public void ParticleAddForce(float x,float y) {
 		for(int i=0;i<lights.size();i++) {
 			lights.get(i).addForce(x, y);
 		}
 	}
 
-	public void setIntensity(float intensity) {
+	public void ParticleSetIntensity(float intensity) {
 		for(int i=0;i<lights.size();i++) {
 			lights.get(i).setIntensity(intensity);
 		}

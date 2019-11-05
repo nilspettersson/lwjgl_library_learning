@@ -83,7 +83,21 @@ public class Window {
 		return !glfwWindowShouldClose(getWindow());
 	}
 	
+	public void close() {
+		glfwSetWindowShouldClose(getWindow(), true);
+	}
 	
+	
+	
+	public void setVSync(boolean on) {
+		if(on) {
+			glfwSwapInterval(1);
+		}
+		else {
+			glfwSwapInterval(1);
+		}
+		
+	}
 	
 	
 	

@@ -18,32 +18,29 @@ public class main2 {
 		Entity rect=new Rect(new Vector3f(0,0, 0), 200, 200, "res/wood_planks_old_0087_01.jpg");
 		
 		
-		Lights light=new Lights(win,1f,Lights.ADD_LIGHT);
-		light.addLight(0, 0, 0.5f);
+		Lights light=new Lights(win,1f,Lights.REMOVE_LIGHT);
 		
-		glfwSwapInterval(0);
+		light.addLight(0, 0, 0.6f);
+		
 		while(win.shouldClose()) {
-			win.drawInit(new Vector4f(0f,0f,0f,1));
-			//light.getShadows().shadowFromGeometry(rect);
-			
+			win.drawInit(new Vector4f(1f,1f,1f,1));
+			light.getShadows().shadowFromGeometry(rect);
 			
 			
 			rect.render(camera);
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
-				rect.move(-0.01f, 0);
+				rect.move(-0.1f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
-				rect.move(0.01f, 0);
+				rect.move(0.1f, 0);
 			}
 			if(win.getInput().isDown(GLFW_KEY_W)) {
-				rect.move(0, 0.01f);
+				rect.move(0, 0.1f);
 			}
 			if(win.getInput().isDown(GLFW_KEY_S)) {
-				rect.move(0, -0.01f);
+				rect.move(0, -0.1f);
 			}
-			
-			
 			
 			light.render(camera);
 			light.getShadows().clearShadows();
