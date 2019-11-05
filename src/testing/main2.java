@@ -18,12 +18,12 @@ public class main2 {
 		Entity rect=new Rect(new Vector3f(0,0, 0), 200, 200, "res/wood_planks_old_0087_01.jpg");
 		
 		
-		Lights light=new Lights(win);
-		light.addLight(0, 0, 1f);
-		light.setZ(1f);
+		Lights light=new Lights(win,1f,Lights.ADD_LIGHT);
+		light.addLight(0, 0, 0.5f);
+		
 		glfwSwapInterval(0);
 		while(win.shouldClose()) {
-			win.drawInit(new Vector4f(1f,1f,1f,1));
+			win.drawInit(new Vector4f(0f,0f,0f,1));
 			//light.getShadows().shadowFromGeometry(rect);
 			
 			

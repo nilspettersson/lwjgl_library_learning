@@ -83,7 +83,7 @@ public class main {
 		
 		Shader s=new Shader("shaderSimple");
 		
-		Lights lights=new Lights(win);
+		Lights lights=new Lights(win,1,0);
 		for(int i=0;i<1;i++) {
 			lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,1f);
 		}

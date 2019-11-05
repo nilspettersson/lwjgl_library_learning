@@ -34,9 +34,13 @@ public class Lights {
 			2,3,0
 	};
 	
+	public static int REMOVE_LIGHT=0;
+	public static int ADD_LIGHT=1;
+	private int LightType;
+	
+	
 	
 	private Model model;
-	//private Matrix4f position=new Matrix4f(); 
 	
 	
 	private ArrayList<Particle> lights;
@@ -50,7 +54,7 @@ public class Lights {
 	
 	private Window window;  //used in shader to get correct width and height
 	
-	public Lights(Window window) {
+	public Lights(Window window,float z, int LightType) {
 		lights=new ArrayList<Particle>();
 		shader=new Shader("shaderLights");
 		model=new Model(vertices, texture,indices);
@@ -59,7 +63,8 @@ public class Lights {
 		shadows=new Shadows();
 		
 		
-		z=1;
+		this.z=z;
+		this.LightType=LightType;
 		ambient=new Vector3f(0,0,0);
 		
 		
@@ -70,6 +75,8 @@ public class Lights {
 		lights.add(new Particle(new Matrix4f().translate(new Vector3f((1920/2)+x,0+y,0)),intensity));
 		
 	}
+	
+	
 	
 	
 	private int particleMax=1;
@@ -198,6 +205,8 @@ public class Lights {
 		
 		shader.setUniform("size", lights.size());
 		shader.setUniform("ambient", ambient);
+		shader.setUniform("type", LightType); //this is the type of light.
+		
 		
 		shader.setUniform("scale", new Vector2f(window.getWidth(),window.getHeight()));
 		
