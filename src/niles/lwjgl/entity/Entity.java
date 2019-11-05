@@ -4,6 +4,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import niles.lwjgl.util.Hitbox;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Shader;
 import niles.lwjgl.util.Texture;
@@ -15,6 +16,7 @@ public abstract class Entity {
 	private static Shader shader=new Shader("shaderSimple");
 	
 	private Matrix4f position=new Matrix4f(); 
+	private Hitbox hitbox;
 	
 	private Vector4f color;
 	
@@ -34,6 +36,7 @@ public abstract class Entity {
 	public void translate(Vector3f vec,float width,float height ) {
 		position=new Matrix4f();
 		position.translate(vec).scale(width, height, 0);
+		hitbox=new Hitbox(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	public float getX() {
@@ -41,10 +44,17 @@ public abstract class Entity {
 	}
 	public float getY() {
 		return position.m31;
+	}public float getWidth() {
+		return position.m00;
+	}
+	public float getHeight() {
+		return position.m11;
 	}
 	
 	public void move(float x,float y) {
 		position.translate(new Vector3f(x, y, 0));
+		hitbox.setX(getX());
+		hitbox.setY(getY());
 	}
 	
 	
@@ -94,6 +104,14 @@ public abstract class Entity {
 
 	public static void setShader(Shader shader) {
 		Entity.shader = shader;
+	}
+
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+
+	public void setHitbox(Hitbox hitbox) {
+		this.hitbox = hitbox;
 	}
 	
 	

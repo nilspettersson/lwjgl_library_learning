@@ -12,10 +12,11 @@ import niles.lwjgl.world.Window;
 public class main2 {
 
 	public static void main(String[] args) {
-		Window win=new Window(1920, 1080, true);
+		Window win=new Window(1920/2, 1080/2, false);
 		Camera camera=new Camera(1920, 1080);
 		
 		Entity rect=new Rect(new Vector3f(0,0, 0), 200, 200, "res/wood_planks_old_0087_01.jpg");
+		Entity rect2=new Rect(new Vector3f(100,0, 0), 200, 200, "res/wood_planks_old_0087_01.jpg");
 		
 		
 		Lights light=new Lights(win,1f,Lights.REMOVE_LIGHT);
@@ -24,10 +25,14 @@ public class main2 {
 		
 		while(win.shouldClose()) {
 			win.drawInit(new Vector4f(1f,1f,1f,1));
-			light.getShadows().shadowFromGeometry(rect);
+			//light.getShadows().shadowFromGeometry(rect);
 			
 			
+			rect2.render(camera);
 			rect.render(camera);
+			if(rect.getHitbox().intersect(rect2.getHitbox())) {
+				System.out.println("hit");
+			}
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
 				rect.move(-0.1f, 0);

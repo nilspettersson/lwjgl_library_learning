@@ -3,6 +3,7 @@ package niles.lwjgl.entity;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import niles.lwjgl.util.Hitbox;
 import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Texture;
 
@@ -30,6 +31,8 @@ public class Rect extends Entity {
 	
 	private float height;
 	private float width;
+	
+	
 	
 	public Rect(Vector3f position,float width,float height,Vector4f color) {
 		super(color);
