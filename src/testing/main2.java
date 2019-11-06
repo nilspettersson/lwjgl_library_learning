@@ -33,7 +33,7 @@ public class main2 {
 		
 		while(win.shouldClose()) {
 			long start=win.getTime();
-			
+			win.drawInit(new Vector4f(1f,1f,1f,1));
 			
 			
 			
@@ -43,7 +43,7 @@ public class main2 {
 			}
 			
 			
-			win.drawInit(new Vector4f(1f,1f,1f,1));
+			
 			
 			if(win.getInput().isPressed(GLFW_KEY_R)) {
 				player.getRect().translate(new Vector3f(100, 100, 0), 100, 100);
@@ -80,13 +80,11 @@ public class main2 {
 			
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
-				//player.getRect().move(-0.1f, 0);
 				if(player.getXvel()>-0.1f) {
 					player.setXvel(player.getXvel()-0.02f);
 				}
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
-				//player.getRect().move(0.1f, 0);
 				if(player.getXvel()<0.1f) {
 					player.setXvel(player.getXvel()+0.02f);
 				}
@@ -103,6 +101,7 @@ public class main2 {
 			light.render(camera);
 			light.getShadows().clearShadows();
 			win.clean();
+			
 			
 			long end=win.getTime();
 			win.update(start, end, 120);
