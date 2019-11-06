@@ -142,5 +142,62 @@ public class Window {
 	}
 	
 	
+	public long getTime() {
+		return System.nanoTime()/1000000;
+	}
+	
+	
+	private int fps=0;
+	public void update(long f,long l, int fpsCap) {
+			
+		//setting up the fps cap.
+		double cap = (1.0/fpsCap)*1000;
+		
+		//finding the difference in time. cap-difference. 
+		double dif=l-f;
+		//if the difference is to much then don't do more. if more then error in Thread.sleep.
+		if(dif>=cap){
+		cap-=dif;
+		}
+		
+		
+		if(cap<=0){
+			cap=1;
+		}
+		try {
+			Thread.sleep((long) cap);
+		}
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// checking fps
+		if(dif<(1.0/fpsCap)*1000) {
+			cap=(1000/cap);
+			fps=(int) cap;
+			//System.out.println(cap);
+		}
+		else if(dif>=(1.0/fpsCap)*1000) {
+			dif=(1000/dif);
+			fps=(int) dif;
+			//System.out.println(dif);
+		}
+	}
+
+
+	public int getFps() {
+		return fps;
+	}
+
+
+	public void setFps(int fps) {
+		this.fps = fps;
+	}
+	
+	
+	
+	
+	
+	
 
 }

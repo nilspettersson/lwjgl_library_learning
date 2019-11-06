@@ -25,6 +25,8 @@ public class main2 {
 		light.addLight(0, 0, 0.6f);
 		
 		while(win.shouldClose()) {
+			long start=win.getTime();
+			
 			win.drawInit(new Vector4f(1f,1f,1f,1));
 
 			Vector2f overlap=player.getRect().getHitbox().intersectFixOverlap(rect2.getHitbox());
@@ -55,6 +57,11 @@ public class main2 {
 			light.render(camera);
 			light.getShadows().clearShadows();
 			win.clean();
+			
+			long end=win.getTime();
+			win.update(start, end, 120);
+			
+			System.out.println(win.getFps());
 		}
 		
 	}
