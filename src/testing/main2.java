@@ -19,6 +19,7 @@ public class main2 {
 		
 		Player player=new Player(0, 100, 100, 100);
 		Entity rect2=new Rect(new Vector3f(-800,-200, 0), 1600, 100, "res/wood_planks_old_0087_01.jpg");
+		Entity rect3=new Rect(new Vector3f(-800,300, 0), 200, 600, "res/wood_planks_old_0087_01.jpg");
 		
 		Lights light=new Lights(win,1f,Lights.REMOVE_LIGHT);
 		
@@ -32,14 +33,21 @@ public class main2 {
 			Vector2f overlap=player.getRect().getHitbox().intersectFixOverlap(rect2.getHitbox());
 			player.getRect().move(overlap.x, overlap.y);
 			
+			Vector2f overlap2=player.getRect().getHitbox().intersectFixOverlap(rect3.getHitbox());
+			player.getRect().move(overlap2.x, overlap2.y);
+			
 			
 			rect2.render(camera);
+			rect3.render(camera);
+			
 			
 			if(overlap.y!=0) {
 				player.setYvel(0);
 				
-				if(win.getInput().isDown(GLFW_KEY_W)) {
-					player.setYvel(0.2f);
+				if(overlap.y>0) {
+					if(win.getInput().isDown(GLFW_KEY_W)) {
+						player.setYvel(0.25f);
+					}
 				}
 			}
 			player.update(camera,-0.01f);
