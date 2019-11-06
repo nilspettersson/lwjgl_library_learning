@@ -76,10 +76,12 @@ public class Window {
 		if(input.isDown(GLFW_KEY_F12)) {
 			glfwSetWindowShouldClose(getWindow(), true);
 		}
+		
+		end=getTime();
 	}
 	
 	
-	public boolean shouldClose(){
+	public boolean shouldUpdate(){
 		return !glfwWindowShouldClose(getWindow());
 	}
 	
@@ -94,7 +96,7 @@ public class Window {
 			glfwSwapInterval(1);
 		}
 		else {
-			glfwSwapInterval(1);
+			glfwSwapInterval(0);
 		}
 		
 	}
@@ -132,6 +134,8 @@ public class Window {
 	
 	
 	public void drawInit(Vector4f clearColor) {
+		start=getTime();
+		
 		glfwPollEvents();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -147,14 +151,17 @@ public class Window {
 	}
 	
 	
+	private long start=0;
+	private long end=0;
+	
 	private int fps=0;
-	public void update(long f,long l, int fpsCap) {
+	public void update(int fpsCap) {
 			
 		//setting up the fps cap.
 		double cap = (1.0/fpsCap)*1000;
 		
 		//finding the difference in time. cap-difference. 
-		double dif=l-f;
+		double dif=end-start;
 		//if the difference is to much then don't do more. if more then error in Thread.sleep.
 		if(dif>=cap){
 		cap-=dif;
@@ -190,12 +197,6 @@ public class Window {
 	}
 
 
-	public void setFps(int fps) {
-		this.fps = fps;
-	}
-	
-	
-	
 	
 	
 	

@@ -20,39 +20,39 @@ public class main2 {
 		Camera camera=new Camera(1920, 1080);
 		
 		Player player=new Player(0, 100, 100, 100);
-		//Entity rect2=new Rect(new Vector3f(-800,-200, 0), 1600, 100, "res/wood_planks_old_0087_01.jpg");
-		//Entity rect3=new Rect(new Vector3f(-800,300, 0), 200, 600, "res/wood_planks_old_0087_01.jpg");
 		ArrayList<Entity>ob=new ArrayList<Entity>();
 		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, "res/wood_planks_old_0087_01.jpg"));
 		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, "res/wood_planks_old_0087_01.jpg"));
 		ob.add(new Rect(new Vector3f(-800,-200, 0), 1600, 100, "res/wood_planks_old_0087_01.jpg"));
 		
-		Lights light=new Lights(win,1.2f,Lights.REMOVE_LIGHT);
+		Lights light=new Lights(win,1.2f,Lights.ADD_LIGHT);
 		
-		light.addLight(0, 0, 1f);
+		light.addLight(-700, 600, 0.6f);
 		
-		while(win.shouldClose()) {
+		win.setVSync(false);
+		while(win.shouldUpdate()) {
 			long start=win.getTime();
-			win.drawInit(new Vector4f(1f,1f,1f,1));
+			win.drawInit(new Vector4f(0.4f,0.6f,1f,1));
 			
 			
 			
 			for(int i=0;i<ob.size();i++) {
 				ob.get(i).render(camera);
-				//light.getShadows().shadowFromGeometry(ob.get(i));
+				light.getShadows().shadowFromGeometry(ob.get(i));
 			}
 			
 			
 			
 			
 			if(win.getInput().isPressed(GLFW_KEY_R)) {
-				player.getRect().translate(new Vector3f(100, 100, 0), 100, 100);
+				player.translate(100, 100);
 			}
 			
 			
+			boolean inAir=true;
 			for(int i=0;i<ob.size();i++) {
 				Vector2f overlapp=player.getRect().getHitbox().intersectFixOverlap(ob.get(i).getHitbox());
-				player.getRect().move(overlapp.x, overlapp.y);
+				player.move(overlapp.x, overlapp.y);
 				
 				if(overlapp.x!=0) {
 					player.setXvel(0f);
@@ -63,48 +63,53 @@ public class main2 {
 					
 					if(overlapp.y>0) {
 						if(win.getInput().isPressed(GLFW_KEY_W)) {
-							player.setYvel(0.25f);
+							player.setYvel(0.20f);
 						}
-						player.setXvel(player.getXvel()/1.4f);
+						//player.setXvel(player.getXvel()/1.4f);
 					}
-					
+					inAir=false;
 				}
 				
 			}
-			player.setXvel(player.getXvel()/1.04f);
+			
+				player.setXvel(player.getXvel()/1.1f);
 			
 			
-			
-			light.translate(0, player.getRect().getX()+player.getRect().getWidth()/2+camera.getWidth()/2, player.getRect().getY());
+			//light.translate(0, player.getRect().getX()+player.getRect().getWidth()/2+camera.getWidth()/2, player.getRect().getY());
 			
 			
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
 				if(player.getXvel()>-0.1f) {
-					player.setXvel(player.getXvel()-0.02f);
+					player.setXvel(player.getXvel()-0.01f);
 				}
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
 				if(player.getXvel()<0.1f) {
-					player.setXvel(player.getXvel()+0.02f);
+					player.setXvel(player.getXvel()+0.01f);
 				}
 			}
 			
 			
+			camera.setPosition(new Vector3f(-player.getX(), -player.getY(), 0));
 			
-			player.update(camera,-0.01f);
+			
+			player.update(camera,-0.006f);
+			
+			
+			light.render(camera);
 			
 			for(int i=0;i<ob.size();i++) {
 				ob.get(i).render(camera);
 			}
 			
-			light.render(camera);
+			
 			light.getShadows().clearShadows();
 			win.clean();
 			
 			
 			long end=win.getTime();
-			win.update(start, end, 120);
+			win.update(120);
 			
 			System.out.println(win.getFps());
 		}

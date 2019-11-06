@@ -16,7 +16,7 @@ public class Player {
 		
 		xvel=0;
 		yvel=0;
-		rect=new Rect(new Vector3f(x, y, 0), width, height, new Vector4f(1,-1,-1,0));
+		rect=new Rect(new Vector3f(x, y, 0), width, height, new Vector4f(1,1,1,1));
 	}
 	
 	
@@ -29,7 +29,22 @@ public class Player {
 		rect.render(camera);
 		
 	}
+	
+	public void move(float x,float y) {
+		rect.move(x, y);
+	}
+	public void translate(float x,float y) {
+		rect.translate(new Vector3f(x, y, 0), rect.getWidth(), rect.getHeight());
+	}
+	
+	
 
+	public float getX() {
+		return rect.getX();
+	}
+	public float getY() {
+		return rect.getY();
+	}
 
 	public float getXvel() {
 		return xvel;

@@ -11,10 +11,10 @@ uniform int type;
 
 
 uniform int size;
-uniform vec4[900] location;  //light locations
+uniform vec4[500] location;  //light locations
 uniform vec3 ambient;
 
-uniform vec2[100] shadowPoints;
+uniform vec2[300] shadowPoints;
 uniform int shadowPointsSize;
 
 
