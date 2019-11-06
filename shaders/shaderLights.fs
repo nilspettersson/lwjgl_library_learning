@@ -197,7 +197,7 @@ void main(){
 						float xdif3=l.x-point.x;
 						float ydif3=l.y-point.y;
 						float dis3=sqrt((xdif3*xdif3)+(ydif3*ydif3));
-						if(dis3*(location[i].z/8)<dis2){ //calculateing if it is in shadow or not.
+						if(dis3*(location[i].z/800)<dis2){ //calculateing if it is in shadow or not.
 							inShadow=true;
 							break;
 						}

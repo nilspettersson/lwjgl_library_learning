@@ -16,7 +16,7 @@ public class Player {
 		
 		xvel=0;
 		yvel=0;
-		rect=new Rect(new Vector3f(x, y, 0), width, height, new Vector4f(1,0,0,0));
+		rect=new Rect(new Vector3f(x, y, 0), width, height, new Vector4f(1,-1,-1,0));
 	}
 	
 	
