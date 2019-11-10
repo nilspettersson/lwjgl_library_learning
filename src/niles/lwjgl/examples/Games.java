@@ -33,7 +33,7 @@ public class Games {
 	
 	public static void createGame() {
 	
-	Window win=new Window(1920/2, 1080/2,false);
+	Window win=new Window(1920, 1080,true);
 	
 	
 	
@@ -82,7 +82,7 @@ public class Games {
 	
 	Lights lights=new Lights(win,1,0);
 	for(int i=0;i<1;i++) {
-		lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.01f);
+		lights.addLight((float)(Math.random()*500)-250, (float)(Math.random()*500)-250,0.4f);
 	}
 	
 	for(int i=0;i<rect.size();i++) {
@@ -163,7 +163,7 @@ public class Games {
 		
 		if(glfwGetMouseButton(win.getWindow(), 0)==1 && down==false) {
 			down=true;
-			lights.addLight(m.getX(), -m.getY(), 0.01f);
+			lights.addLight(m.getX(), -m.getY(), 0.4f);
 		}
 		else if(glfwGetMouseButton(win.getWindow(), 0)==0) {
 			down=false;

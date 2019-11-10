@@ -23,7 +23,7 @@ public class main2 {
 		ArrayList<Entity>ob=new ArrayList<Entity>();
 		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, "res/wood_planks_old_0087_01.jpg"));
 		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, "res/wood_planks_old_0087_01.jpg"));
-		ob.add(new Rect(new Vector3f(-800,-200, 0), 1600, 100, "res/wood_planks_old_0087_01.jpg"));
+		ob.add(new Rect(new Vector3f(-80000,-200, 0), 160000, 100, "res/wood_planks_old_0087_01.jpg"));
 		
 		Lights light=new Lights(win,1.2f,Lights.ADD_LIGHT);
 		
