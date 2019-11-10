@@ -28,43 +28,10 @@ public class Hitbox {
 		return false;
 	}
 	
-	/*public Vector2f intersectFixOverlap(Hitbox hitbox) {
-		if(x<hitbox.x+hitbox.width && y>hitbox.y-hitbox.height) {
-			if(x+width>hitbox.x && y-height<hitbox.y) {
-				float dx=x-hitbox.x;
-				float dy=y-hitbox.y;
-				
-				System.out.println(dx+"   "+dy);
-				if(Math.abs(dx)>Math.abs(dy)) {
-					float dx2=x-(hitbox.x+hitbox.width);
-					float dx3=(x+width)-hitbox.x;
-					if(Math.abs(dx2)<Math.abs(dx3)) {
-						return new Vector2f(-dx2/width,0);
-					}
-					else {
-						return new Vector2f(-dx3/width,0);
-					}
-					
-				}
-				else {
-					float dy2=y-(hitbox.y-hitbox.height);
-					float dy3=(y-height)-hitbox.y;
-					if(Math.abs(dy2)<Math.abs(dy3)) {
-					return new Vector2f(0,-dy2/height);
-					}
-					else {
-						return new Vector2f(0,-dy3/height);
-					}
-					
-				}
-				
-			}
-		}
-		return new Vector2f(0,0);
-	}*/
 	
 	
 	
+	//this will return the amount that the rect needs to be moved to not intersect.
 	public Vector2f intersectFixOverlap(Hitbox hitbox) {
 		float dxEB=(x+width)-(hitbox.x);
 		float dyEB=(y-height)-(hitbox.y);

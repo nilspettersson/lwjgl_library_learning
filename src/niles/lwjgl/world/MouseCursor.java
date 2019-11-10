@@ -78,8 +78,6 @@ public class MouseCursor {
 
 
          
-        // myX+=deltaX;
-        // myY+=deltaY;
          return new Vector2f((float)deltaX*sensitivity,(float)deltaY*sensitivity);
      }
 
