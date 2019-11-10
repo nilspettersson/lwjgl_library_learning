@@ -19,7 +19,7 @@ public class main2 {
 		Window win=new Window(1920, 1080, true);
 		Camera camera=new Camera(1920, 1080);
 		
-		Player player=new Player(0, 100, 100, 100);
+		Player player=new Player(0, 100, 100, 100,new Vector4f(0.5f,0.5f,0.5f,1f));
 		ArrayList<Entity>ob=new ArrayList<Entity>();
 		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, "res/wood_planks_old_0087_01.jpg"));
 		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, "res/wood_planks_old_0087_01.jpg"));

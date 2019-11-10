@@ -102,7 +102,9 @@ public class Texture {
 		}
 	}
 	
-	
+	public static void unBind() {
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 	
 
 }

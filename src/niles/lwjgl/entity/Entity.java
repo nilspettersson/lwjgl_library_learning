@@ -63,6 +63,10 @@ public abstract class Entity {
 		if(texture!=null) {
 			texture.bind(0);
 		}
+		else {
+			Texture.unBind();
+		}
+		
 		shader.bind();
 		
 		

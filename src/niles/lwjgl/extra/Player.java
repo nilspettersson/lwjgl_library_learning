@@ -18,6 +18,12 @@ public class Player {
 		yvel=0;
 		rect=new Rect(new Vector3f(x, y, 0), width, height, new Vector4f(1,1,1,1));
 	}
+	public Player(float x, float y, float width, float height, Vector4f color) {
+		
+		xvel=0;
+		yvel=0;
+		rect=new Rect(new Vector3f(x, y, 0), width, height, color);
+	}
 	
 	
 	public void update(Camera camera,float gravity) {
