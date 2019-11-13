@@ -31,23 +31,25 @@ import niles.lwjgl.world.Window;
 
 public class main2 {
 	public static void main(String[] args) {
-		Window win=new Window(1920/2, 1080/2, false);
+		Window win=new Window(1920, 1080, true);
 		Camera camera=new Camera(1920, 1080);
 		
-		Player player=new Player(0, 100, 100, 100,new Vector4f(1f,0.2f,0.2f,1f));
+		Texture playerTexture=new Texture("res/goodImage.png");
+		Player player=new Player(0, 400, 200, 200, playerTexture);
 		
 		
 		Texture texture=new Texture("res/floor.png");
+		Texture texture2=new Texture("res/wood_planks_old_0087_01.jpg");
 		
 		ArrayList<Entity>ob=new ArrayList<Entity>();
-		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, texture));
-		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, texture));
-		ob.add(new Rect(new Vector3f(-80000,-200, 0), 160000, 100, texture));
+		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, texture2));
+		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, texture2));
+		ob.add(new Rect(new Vector3f(-80000,-200, 0), 160000, 100, texture2));
 		
 		
-		for(int i=0;i<10000;i++) {
+		/*for(int i=0;i<1000;i++) {
 			ob.add(new Rect(new Vector3f((float)(Math.random()*400), (float)(Math.random()*400), 0), 40, 40, texture));
-		}
+		}*/
 		
 		
 		Lights light=new Lights(win,1.2f,Lights.ADD_LIGHT);
@@ -63,7 +65,7 @@ public class main2 {
 			
 			
 			if(win.getInput().isPressed(GLFW_KEY_R)) {
-				player.translate(100, 100);
+				player.translate(100, 400);
 				player.setXvel(0);
 				player.setYvel(0);
 			}
@@ -83,7 +85,7 @@ public class main2 {
 					
 					if(overlapp.y>0) {
 						if(win.getInput().isPressed(GLFW_KEY_W)) {
-							player.setYvel(0.20f);
+							player.setYvel(0.15f);
 						}
 						//player.setXvel(player.getXvel()/1.4f);
 					}
@@ -110,13 +112,18 @@ public class main2 {
 			
 			if(win.getInput().isDown(GLFW_KEY_A)) {
 				if(player.getXvel()>-0.1f) {
-					player.setXvel(player.getXvel()-0.01f);
+					player.setXvel(player.getXvel()-0.005f);
 				}
 			}
 			if(win.getInput().isDown(GLFW_KEY_D)) {
 				if(player.getXvel()<0.1f) {
-					player.setXvel(player.getXvel()+0.01f);
+					player.setXvel(player.getXvel()+0.005f);
 				}
+			}
+			
+			
+			if(win.getInput().isDown(GLFW_KEY_E)) {
+				player.getRect().rotate();
 			}
 			
 			

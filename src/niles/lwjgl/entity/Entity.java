@@ -39,6 +39,12 @@ public abstract class Entity {
 		hitbox=new Hitbox(getX(), getY(), getWidth(), getHeight());
 	}
 	
+	public void rotate() {
+		position.rotateZ((float)0.05);
+		position.rotateX((float)0.02);
+		position.rotateY((float)0.05);
+	}
+	
 	public float getX() {
 		return position.m30;
 	}

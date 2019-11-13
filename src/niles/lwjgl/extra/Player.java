@@ -5,6 +5,7 @@ import org.joml.Vector4f;
 
 import niles.lwjgl.entity.Entity;
 import niles.lwjgl.entity.Rect;
+import niles.lwjgl.util.Texture;
 import niles.lwjgl.world.Camera;
 
 public class Player {
@@ -23,6 +24,12 @@ public class Player {
 		xvel=0;
 		yvel=0;
 		rect=new Rect(new Vector3f(x, y, 0), width, height, color);
+	}
+public Player(float x, float y, float width, float height, Texture texture) {
+		
+		xvel=0;
+		yvel=0;
+		rect=new Rect(new Vector3f(x, y, 0), width, height, texture);
 	}
 	
 	
