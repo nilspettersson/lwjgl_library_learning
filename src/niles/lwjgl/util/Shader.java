@@ -62,27 +62,27 @@ public class Shader {
 	
 	
 	public void setUniform(String name,int value) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		if(location!=-1) {
 			glUniform1i(location, value);
 		}
 	}
 	public void setUniform(String name,float value) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		if(location!=-1) {
 			glUniform1f(location, value);
 		}
 	}
 	
 	public void setUniform(String name,Vector4f vec) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		if(location!=-1) {
 			glUniform4f(location, vec.x, vec.y,vec.z,vec.w );
 		}
 	}
 	
 	public void setUniform(String name,Matrix4f value) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		FloatBuffer buffer=BufferUtils.createFloatBuffer(16);
 		value.get(buffer);
 		if(location!=-1) {
@@ -91,7 +91,7 @@ public class Shader {
 	}
 	
 	public void setUniform(String name,Vector4f[] vec) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		FloatBuffer buffer=BufferUtils.createFloatBuffer(vec.length*4);
 		for(int i=0;i<vec.length;i++) {
 			buffer.put(vec[i].x);
@@ -106,7 +106,7 @@ public class Shader {
 	}
 	
 	public void setUniform(String name,Vector2f[] vec) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		FloatBuffer buffer=BufferUtils.createFloatBuffer(vec.length*2);
 		for(int i=0;i<vec.length;i++) {
 			buffer.put(vec[i].x);
@@ -119,14 +119,14 @@ public class Shader {
 	}
 	
 	public void setUniform(String name,Vector3f vec) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		if(location!=-1) {
 			glUniform3f(location, vec.x, vec.y,vec.z);
 		}
 	}
 	
 	public void setUniform(String name,Vector2f vec) {
-		int location=glGetUniformLocation(program, name);
+		int location=getLocation(name);
 		if(location!=-1) {
 			glUniform2f(location, vec.x, vec.y);
 		}

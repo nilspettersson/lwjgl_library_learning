@@ -44,11 +44,12 @@ public class Model {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
 	}
 	
 	
 	public void render() {
-		
+		init();
 		
 		
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
@@ -66,7 +67,7 @@ public class Model {
 		glBindBuffer(GL_ARRAY_BUFFER,0);
 		
 		
-		
+		clean();
 	}
 	
 	public static void init() {
