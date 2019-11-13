@@ -45,16 +45,13 @@ public class Model {
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
-		
+		init();
 	}
 	
-	static boolean done=false;
+	
 	public void render() {
-		init();
 		
-		if(!done) {
-			
-		}
+		
 		
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
@@ -67,22 +64,16 @@ public class Model {
 		
 		glDrawElements(GL_TRIANGLES, draw_count,GL_UNSIGNED_INT,0);
 		
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ARRAY_BUFFER,0);
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		//glBindBuffer(GL_ARRAY_BUFFER,0);
 		
 		
-		clean();
 		
-		done=true;
 	}
 	
 	public static void init() {
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-	}
-	public static void clean() {
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
 	}
 	
 	

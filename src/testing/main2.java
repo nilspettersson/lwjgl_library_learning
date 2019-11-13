@@ -58,13 +58,6 @@ public class main2 {
 		while(win.shouldUpdate()) {
 			long start=win.getTime();
 			win.drawInit(new Vector4f(0.4f,0.6f,1f,1));
-			//Model.init();
-			
-			
-			for(int i=0;i<ob.size();i++) {
-				ob.get(i).render(camera);
-				light.getShadows().shadowFromGeometry(ob.get(i));
-			}
 			
 			
 			
@@ -133,13 +126,15 @@ public class main2 {
 			player.update(camera,-0.006f);
 			
 			
-			//light.render(camera);
+			light.render(camera);
 			
-			/*for(int i=0;i<ob.size();i++) {
+			
+			
+			for(int i=0;i<ob.size();i++) {
 				ob.get(i).render(camera);
-			}*/
+			}
 			
-			//Model.clean();
+			
 			
 			light.getShadows().clearShadows();
 			win.clean();
