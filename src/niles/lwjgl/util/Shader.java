@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.FloatBuffer;
+import java.util.HashMap;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -132,6 +133,14 @@ public class Shader {
 	}
 	
 	
+	private HashMap<String, Integer>locations=new HashMap<String, Integer>();
+	
+	public int getLocation(String name) {
+		if(!locations.containsKey(name)) {
+			locations.put(name, glGetUniformLocation(program, name));
+		}
+		return locations.get(name);
+	}
 	
 	
 	

@@ -2,6 +2,7 @@ package niles.lwjgl.util;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL40.*;
 
 
 import java.nio.FloatBuffer;
@@ -47,8 +48,7 @@ public class Model {
 	
 	
 	public void render() {
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
+		
 		
 		
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
@@ -65,6 +65,15 @@ public class Model {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ARRAY_BUFFER,0);
 		
+		
+		
+	}
+	
+	public static void init() {
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+	}
+	public static void clean() {
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 	}

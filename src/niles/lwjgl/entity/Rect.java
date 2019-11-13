@@ -41,7 +41,6 @@ public class Rect extends Entity {
 		translate(position,width,height);
 		
 		setModel(createModel());
-		//setTexture(createTexture());
 	}
 	public Rect(Vector3f position,float width,float height,String textureName) {
 		super(new Vector4f(0, 0, 0, 0));
@@ -52,6 +51,16 @@ public class Rect extends Entity {
 		setModel(createModel());
 		setTexture(createTexture(textureName));
 	}
+	public Rect(Vector3f position,float width,float height,Texture texture) {
+		super(new Vector4f(0, 0, 0, 0));
+		this.width=width;
+		this.height=height;
+		translate(position,width,height);
+		
+		setModel(createModel());
+		setTexture(texture);
+	}
+	
 	
 
 	@Override
