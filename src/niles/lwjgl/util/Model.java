@@ -45,12 +45,16 @@ public class Model {
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
+		
 	}
 	
-	
+	static boolean done=false;
 	public void render() {
 		init();
 		
+		if(!done) {
+			
+		}
 		
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
@@ -68,6 +72,8 @@ public class Model {
 		
 		
 		clean();
+		
+		done=true;
 	}
 	
 	public static void init() {
