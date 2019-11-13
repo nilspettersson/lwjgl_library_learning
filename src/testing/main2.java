@@ -31,7 +31,7 @@ import niles.lwjgl.world.Window;
 
 public class main2 {
 	public static void main(String[] args) {
-		Window win=new Window(1920, 1080, true);
+		Window win=new Window(1920/2, 1080/2, false);
 		Camera camera=new Camera(1920, 1080);
 		
 		Player player=new Player(0, 100, 100, 100,new Vector4f(1f,0.2f,0.2f,1f));
@@ -95,7 +95,7 @@ public class main2 {
 			player.setXvel(player.getXvel()/1.1f);
 			
 			
-			light.translate(0, player.getRect().getX()+player.getRect().getWidth()/2+camera.getWidth()/2, player.getRect().getY());
+			//light.translate(0, player.getRect().getX()+player.getRect().getWidth()/2+camera.getWidth()/2, player.getRect().getY());
 			
 				
 				

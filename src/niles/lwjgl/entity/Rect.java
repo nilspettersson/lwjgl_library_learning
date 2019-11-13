@@ -27,7 +27,7 @@ public class Rect extends Entity {
 			2,3,0
 	};
 	static Model model=new Model(vertices, tex_coords, indices);
-	static Texture texture;
+	Texture texture;
 	
 	private float height;
 	private float width;

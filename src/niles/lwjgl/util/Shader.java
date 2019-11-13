@@ -81,6 +81,11 @@ public class Shader {
 		}
 	}
 	
+	
+	
+	
+	
+	
 	public void setUniform(String name,Matrix4f value) {
 		int location=getLocation(name);
 		FloatBuffer buffer=BufferUtils.createFloatBuffer(16);

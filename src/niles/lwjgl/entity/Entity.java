@@ -73,6 +73,7 @@ public abstract class Entity {
 		shader.setUniform("color", color);
 		
 		shader.setUniform("projection", camera.getProjection().mul(position));
+		
 		model.render();
 	}
 
