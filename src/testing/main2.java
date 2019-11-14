@@ -24,7 +24,6 @@ import niles.lwjgl.entity.Entity;
 import niles.lwjgl.entity.Rect;
 import niles.lwjgl.extra.Player;
 import niles.lwjgl.light.Lights;
-import niles.lwjgl.util.Model;
 import niles.lwjgl.util.Texture;
 import niles.lwjgl.world.Camera;
 import niles.lwjgl.world.Window;
@@ -34,22 +33,22 @@ public class main2 {
 		Window win=new Window(1920, 1080, true);
 		Camera camera=new Camera(1920, 1080);
 		
-		Texture playerTexture=new Texture("res/goodImage.png");
+		Texture playerTexture=new Texture("res/floor.png");
 		Player player=new Player(0, 400, 200, 200, playerTexture);
 		
 		
 		Texture texture=new Texture("res/floor.png");
-		Texture texture2=new Texture("res/wood_planks_old_0087_01.jpg");
+		//Texture texture2=new Texture("res/wood_planks_old_0087_01.jpg");
 		
 		ArrayList<Entity>ob=new ArrayList<Entity>();
-		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, texture2));
-		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, texture2));
-		ob.add(new Rect(new Vector3f(-80000,-200, 0), 160000, 100, texture2));
+		ob.add(new Rect(new Vector3f(-300,100, 0), 800, 100, texture));
+		ob.add(new Rect(new Vector3f(-800,300, 0), 200, 600, texture));
+		ob.add(new Rect(new Vector3f(-80000,-200, 0), 160000, 100, texture));
 		
 		
-		/*for(int i=0;i<1000;i++) {
+		for(int i=0;i<0;i++) {
 			ob.add(new Rect(new Vector3f((float)(Math.random()*400), (float)(Math.random()*400), 0), 40, 40, texture));
-		}*/
+		}
 		
 		
 		Lights light=new Lights(win,1.2f,Lights.ADD_LIGHT);
