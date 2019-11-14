@@ -17,9 +17,36 @@ void main(){
 	
 	
 	
-	vec2 l = gl_FragCoord.xy/1080;
+	vec2 l = gl_FragCoord.xy;
+	l.x-=1920/2;
+	l.y-=1080/2;
 	
-	gl_FragColor = vec4(l.x,l.y,l.x+l.y,1);
+	l.x/=500;
+	l.y/=500;
+	
+	
+	float x0=l.x;
+	float y0=l.y;
+	
+	float x=0.0;
+	float y=0.0;
+	int i=0;
+	int maxI=100;
+
+	while(x*x+y*y<=2*2 && i<maxI){
+
+		float xTemp=x*x-y*y+x0;
+		y=2*x*y+y0;
+		x=xTemp;
+		i++;
+
+	}
+	if(i==maxI){
+		gl_FragColor = vec4(0,0,0,1);
+	}
+	else{
+		gl_FragColor = vec4(i,i,i,1);
+	}
 
 }
 
