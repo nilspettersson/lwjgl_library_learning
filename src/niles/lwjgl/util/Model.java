@@ -18,6 +18,30 @@ public class Model {
 	
 	private float[] vertices;
 	
+	
+	
+	public static Model CreateModel() {
+		float[] verticesTemp=new float[] {
+				-1f,1f,0,
+				1f,1f,0,
+				1f,-1f,0,
+				-1f,-1f,0
+				
+		};
+		float[] tex_coordsTemp=new float[] {
+				0,0,
+				1,0,
+				1,1,
+				0,1
+		};
+		int[] indicesTemp=new int[] {
+				0,1,2,
+				2,3,0
+		};
+		
+		return new Model(verticesTemp, tex_coordsTemp, indicesTemp);
+	}
+	
 	public Model(float[] vertices, float[] tex_coords, int[] indices) {
 		draw_count=indices.length;
 		

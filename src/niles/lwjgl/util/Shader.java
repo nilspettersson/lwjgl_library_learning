@@ -26,6 +26,7 @@ public class Shader {
 		vs=glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vs, readFile(filename+".vs"));
 		glCompileShader(vs);
+		
 		if(glGetShaderi(vs, GL_COMPILE_STATUS)!=1) {
 			System.err.println(glGetShaderInfoLog(vs));
 			System.exit(1);
@@ -171,6 +172,7 @@ public class Shader {
 			String line;
 			while((line=br.readLine())!=null) {
 				string.append(line);
+				
 				string.append("\n");
 			}
 			br.close();
