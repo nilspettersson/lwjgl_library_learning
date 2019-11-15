@@ -50,8 +50,8 @@ void main(){
 		gl_FragColor = vec4(0,0,0,1);
 	}
 	else{
-		float c=map(i,1,1000,0,10);
-		gl_FragColor = vec4(0,c,0,1);
+		float c=map(i,1,maxI,0,10);
+		gl_FragColor = vec4(c,c,0,1);
 	}
 
 }
