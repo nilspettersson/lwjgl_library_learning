@@ -13,7 +13,8 @@ public class Rect extends Entity {
 			0f,0f,0,
 			1f,0f,0,
 			1f,-1f,0,
-			0f,-1f,0
+			0f,-1f,0,
+			
 			
 	};
 	private static float[] tex_coords=new float[] {

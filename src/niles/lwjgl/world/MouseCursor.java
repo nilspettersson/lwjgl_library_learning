@@ -42,7 +42,6 @@ public class MouseCursor {
     	 glfwSetCursorPos(win.getWindow(), x, y);
      }
      
-     
 
      //this function does all the hard work to make an the mouse control the camera 
      public void moveCamera(Window win,Camera camera,float sensitivity ) {

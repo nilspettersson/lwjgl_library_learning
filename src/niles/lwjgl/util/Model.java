@@ -20,14 +20,27 @@ public class Model {
 	
 	
 	
-	public static Model CreateModel() {
-		float[] verticesTemp=new float[] {
-				-1f,1f,0,
-				1f,1f,0,
-				1f,-1f,0,
-				-1f,-1f,0
-				
-		};
+	public static Model CreateModel(boolean xyCenter) {
+		float[] verticesTemp;
+		if(xyCenter) {
+			verticesTemp=new float[] {
+			-1f,1f,0,
+			1f,1f,0,
+			1f,-1f,0,
+			-1f,-1f,0
+			};
+		}
+		else {
+			verticesTemp=new float[] {
+					0f,0f,0,
+					1f,0f,0,
+					1f,-1f,0,
+					0f,-1f,0,
+					
+			};
+		}
+		
+		
 		float[] tex_coordsTemp=new float[] {
 				0,0,
 				1,0,
@@ -41,6 +54,9 @@ public class Model {
 		
 		return new Model(verticesTemp, tex_coordsTemp, indicesTemp);
 	}
+	
+	
+	
 	
 	public Model(float[] vertices, float[] tex_coords, int[] indices) {
 		draw_count=indices.length;

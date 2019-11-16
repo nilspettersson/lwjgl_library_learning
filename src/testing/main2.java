@@ -53,6 +53,7 @@ public class main2 {
 		
 		Lights light=new Lights(win,1.2f,Lights.ADD_LIGHT);
 		
+		
 		light.addLight(-700, 600, 0.6f);
 		
 		win.setVSync(false);
