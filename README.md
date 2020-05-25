@@ -1,6 +1,3 @@
-# lwjglGameEngine
+# lwjgl_library
 
-
-lwjgl game engine
-
-this lwjgl game engine is made to make it easier to make games using gpu.
+this repository is my first try off making a 2D lwjgl library. it has suport for quads, textures, lighting and particle systems.
